@@ -1,5 +1,5 @@
 <p align="center">
-   <img src="https://github.com/KalifyInc/mobile-findyourpet/blob/main/assets/images/logotipo.png" width="300"/>
+   <img src="https://github.com/KalifyInc/website-findyourpet/blob/main/assets/logotipo.png?raw=true" width="500"/>
 </p>
 
 <p align="center">
