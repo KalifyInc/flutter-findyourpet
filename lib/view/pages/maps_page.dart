@@ -11,6 +11,14 @@ class MapsPage extends StatefulWidget {
 class _MapsPageState extends State<MapsPage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: Center(child: Text(widget.title)));
+    return Scaffold(
+        appBar: AppBar(
+          title: const Text(
+            'FindYourPet',
+            style: TextStyle(fontSize: 25),
+          ),
+          centerTitle: true,
+        ),
+        body: Center(child: Text(widget.title)));
   }
 }
