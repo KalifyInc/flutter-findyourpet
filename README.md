@@ -19,7 +19,7 @@
 </p>
 
 <div align="center">
-  <sub>FindYourPet. Built with ❤︎ by
+  <sub>FindYourPet. Built with 💚 by
     <a href="https://github.com/KalifyInc">Kalify Inc</a> and
     <a href="https://github.com/KalifyInc/mobile-findyourpet/graphs/contributors">
       contributors
@@ -30,7 +30,6 @@
 # 📌 Table of Contents
 
 - [📌 Table of Contents](#-table-of-contents)
-<!-- - [👀 Demo Website](#-demo-website) -->
 - [💻 Technologies](#-technologies)
 - [🚀 Features](#-features)
 - [🚧 How to run](#-how-to-run)
