@@ -34,13 +34,13 @@ class _StartPageState extends State<StartPage> {
     return Scaffold(
       body: PageView(
         controller: pageController,
+        onPageChanged: setCurrentPage,
         children: const [
           HomePage(title: 'Home Page'),
           RegisterPage(title: 'Register Page'),
           MapsPage(title: 'Maps Page'),
           InformationPage(title: 'Information Page'),
         ],
-        onPageChanged: setCurrentPage,
       ),
       bottomNavigationBar: BottomNavigation(
           currentIndex: currentPage,
