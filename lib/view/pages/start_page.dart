@@ -46,7 +46,8 @@ class _StartPageState extends State<StartPage> {
           currentIndex: currentPage,
           onTapController: (page) {
             pageController.animateToPage(page,
-                duration: Duration(milliseconds: 400), curve: Curves.ease);
+                duration: const Duration(milliseconds: 400),
+                curve: Curves.ease);
           }),
     );
   }
