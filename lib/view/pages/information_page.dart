@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 
 class InformationPage extends StatefulWidget {
-  const InformationPage({super.key, required this.title});
-  final String title;
+  const InformationPage({super.key});
 
   @override
   State<InformationPage> createState() => _InformationPageState();

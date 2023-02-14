@@ -38,8 +38,8 @@ class _StartPageState extends State<StartPage> {
         children: const [
           HomePage(title: 'Home Page'),
           RegisterPage(title: 'Register Page'),
-          MapsPage(title: 'Maps Page'),
-          InformationPage(title: 'Information Page'),
+          MapsPage(),
+          InformationPage(),
         ],
       ),
       bottomNavigationBar: BottomNavigation(
