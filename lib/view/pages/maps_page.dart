@@ -22,8 +22,9 @@ class _MapsPageState extends State<MapsPage> {
       ),
       body: SingleChildScrollView(
           child: Container(
-        height: 1000,
-        child: MapComponent(),
+        width: MediaQuery.of(context).size.width.roundToDouble(),
+        height: MediaQuery.of(context).size.height.roundToDouble(),
+        child: const MapComponent(),
       )),
     );
   }
