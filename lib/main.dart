@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:mobile_find_your_pet/themes/app_theme.dart';
-import '../config/firebase_options.dart';
-import 'view/pages/start_page.dart';
+import 'package:mobile_find_your_pet/app/themes/app_theme.dart';
+import 'app/config/firebase_options.dart';
+import 'app/view/pages/start_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
