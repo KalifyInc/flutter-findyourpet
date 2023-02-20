@@ -13,7 +13,7 @@ class _SubTitleState extends State<SubTitle> {
   Widget build(BuildContext context) {
     return Text(
       widget.title,
-      style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 14),
+      style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 16),
     );
   }
 }

@@ -31,6 +31,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       style:
                           TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
                     ),
+                    SizedBox(height: 20),
                     FormComponent()
                   ],
                 ),

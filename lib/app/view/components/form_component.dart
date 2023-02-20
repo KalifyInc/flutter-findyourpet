@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:form_builder_image_picker/form_builder_image_picker.dart';
 import 'package:mobile_find_your_pet/app/controller/register_controller.dart';
+import 'package:mobile_find_your_pet/app/view/components/select_input.dart';
 import 'package:mobile_find_your_pet/app/view/components/subtitle.dart';
+import 'package:mobile_find_your_pet/app/view/components/text_input.dart';
 
 class FormComponent extends StatefulWidget {
   const FormComponent({super.key});
@@ -17,45 +20,54 @@ class _FormComponentState extends State<FormComponent> {
     return Form(
       key: controller.formKey,
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           const SubTitle(title: 'FOTO DO ANIMAL'),
+          FormBuilderImagePicker(
+            name: 'photos',
+            placeholderWidget: const Icon(Icons.photo_library),
+            fit: BoxFit.fill,
+            maxImages: 1,
+            onChanged: (value) => controller.validateInput(value),
+            onSaved: (value) => controller.validateInput(value),
+            validator: (value) => controller.validateInput(value),
+            decoration: const InputDecoration(
+              border: InputBorder.none,
+            ),
+          ),
+          const SizedBox(height: 14),
           const SubTitle(title: 'NOME DO ANIMAL'),
-          TextFormField(
-            // The validator receives the text that the user has entered.
-            validator: (value) => controller.validateInput(value),
-            // onSaved: ,
-            decoration: const InputDecoration(
-              border: OutlineInputBorder(),
-              // hintText: 'Enter a search term',
-            ),
-          ),
+          const SizedBox(height: 14),
+          const TextInput(),
+          const SizedBox(height: 14),
           const SubTitle(title: 'QUAL É A SITUAÇÃO?'),
-          const SubTitle(title: 'CIDADE DO ANIMAL'),
-          const SubTitle(title: 'BAIRRO DO ANIMAL'),
+          const SizedBox(height: 14),
+          const SelectInput(),
+          const SizedBox(height: 14),
+          const SubTitle(title: 'ENDEREÇO DO ANIMAL'),
+          const SizedBox(height: 14),
+          const TextInput(),
+          const SizedBox(height: 14),
           const SubTitle(title: 'DESCRIÇÃO DO ANIMAL'),
-          TextFormField(
-            // The validator receives the text that the user has entered.
-            validator: (value) => controller.validateInput(value),
-            decoration: const InputDecoration(
-              border: OutlineInputBorder(),
-              // hintText: 'Enter a search term',
-            ),
-          ),
+          const SizedBox(height: 14),
+          const TextInput(),
+          const SizedBox(height: 14),
           const SubTitle(title: 'NÚMERO DE TELEFONE'),
-          TextFormField(
-            // The validator receives the text that the user has entered.
-            validator: (value) => controller.validateInput(value),
-            keyboardType: TextInputType.phone,
-            decoration: const InputDecoration(
-              border: OutlineInputBorder(),
-            ),
-          ),
+          const SizedBox(height: 14),
+          const TextInput(),
+          const SizedBox(height: 14),
           Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              // ElevatedButton(
-              //   onPressed: () => Form.clear(),
-              //   child: const Text('LIMPAR'),
-              // ),
+              ElevatedButton(
+                onPressed: () => controller.clearForm(),
+                style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color.fromARGB(
+                        255, 224, 209, 67) // background (button) color
+                    ),
+                child: const Text('LIMPAR'),
+              ),
               if (controller.isLoading)
                 const CircularProgressIndicator()
               else
