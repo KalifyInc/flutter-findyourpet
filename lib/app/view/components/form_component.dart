@@ -26,17 +26,21 @@ class _FormComponentState extends State<FormComponent> {
           FormBuilderImagePicker(
             name: 'photos',
             placeholderWidget: const Icon(Icons.photo_library),
-            fit: BoxFit.fill,
+            fit: BoxFit.cover,
             maxImages: 1,
             onChanged: (value) => controller.validateInput(value),
-            onSaved: (value) => controller.validateInput(value),
+            onSaved: (value) => debugPrint(
+                '--------------------${value as String?}--------------------'),
             validator: (value) => controller.validateInput(value),
             decoration: const InputDecoration(
-              border: InputBorder.none,
-            ),
+                border: OutlineInputBorder(), filled: true),
           ),
           const SizedBox(height: 14),
           const SubTitle(title: 'NOME DO ANIMAL'),
+          const SizedBox(height: 14),
+          const TextInput(),
+          const SizedBox(height: 14),
+          const SubTitle(title: 'DESCRIÇÃO DO ANIMAL'),
           const SizedBox(height: 14),
           const TextInput(),
           const SizedBox(height: 14),
@@ -48,10 +52,6 @@ class _FormComponentState extends State<FormComponent> {
           const SizedBox(height: 14),
           const TextInput(),
           const SizedBox(height: 14),
-          const SubTitle(title: 'DESCRIÇÃO DO ANIMAL'),
-          const SizedBox(height: 14),
-          const TextInput(),
-          const SizedBox(height: 14),
           const SubTitle(title: 'NÚMERO DE TELEFONE'),
           const SizedBox(height: 14),
           const TextInput(),
@@ -60,14 +60,6 @@ class _FormComponentState extends State<FormComponent> {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              ElevatedButton(
-                onPressed: () => controller.clearForm(),
-                style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color.fromARGB(
-                        255, 224, 209, 67) // background (button) color
-                    ),
-                child: const Text('LIMPAR'),
-              ),
               if (controller.isLoading)
                 const CircularProgressIndicator()
               else
@@ -82,6 +74,14 @@ class _FormComponentState extends State<FormComponent> {
                   },
                   child: const Text('ENVIAR'),
                 ),
+              ElevatedButton(
+                onPressed: () => controller.clearForm(),
+                style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color.fromARGB(
+                        255, 224, 209, 67) // background (button) color
+                    ),
+                child: const Text('LIMPAR'),
+              ),
             ],
           ),
         ],
