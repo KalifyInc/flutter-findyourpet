@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:mobile_find_your_pet/app/view/pages/information_page.dart';
-import 'package:mobile_find_your_pet/app/view/pages/maps_page.dart';
-import 'package:mobile_find_your_pet/app/view/pages/register_page.dart';
+import 'package:FindYourPet/app/view/pages/information_page.dart';
+import 'package:FindYourPet/app/view/pages/maps_page.dart';
+import 'package:FindYourPet/app/view/pages/register_page.dart';
 
 import '../components/bottom_navigation_bar.dart';
 import 'home_page.dart';

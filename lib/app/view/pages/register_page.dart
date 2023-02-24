@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mobile_find_your_pet/app/view/components/form_component.dart';
+import 'package:FindYourPet/app/view/components/form_component.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
