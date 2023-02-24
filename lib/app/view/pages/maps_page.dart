@@ -24,8 +24,8 @@ class _MapsPageState extends State<MapsPage> {
             child: Container(
           width: MediaQuery.of(context).size.width.roundToDouble(),
           height: MediaQuery.of(context).size.height.roundToDouble(),
-          child: const MapComponent(),)
-        ));
+          child: const MapComponent(),
+        )));
     // );
   }
 }
