@@ -21,20 +21,13 @@ class _InformationPageState extends State<InformationPage> {
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    const Text(
-                      'FindYourPet',
-                      style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
-                    ),
-                    const SizedBox(height: 10),
+                    Image.asset('assets/images/Logo-Transp.png'),
                     const Text(
                       'Versão 1.0.0',
                       style:
                           TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
                     ),
-                    const SizedBox(height: 20),
-                    Image.asset('assets/images/pet_icon_green.png'),
-                    const SizedBox(height: 20),
+                    const SizedBox(height: 10),
                     Text(
                       '2022 - $currentYear Kalify Inc.',
                       style: const TextStyle(fontSize: 16),
