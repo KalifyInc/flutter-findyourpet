@@ -10,7 +10,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:843679913436:android:d9fec5e5318403e5bb6b19",
         "android_client_info": {
-          "package_name": "com.example.mobile_find_your_pet"
+          "package_name": "com.example.FindYourPet"
         }
       },
       "oauth_client": [
