@@ -53,7 +53,12 @@ class RegisterController {
   }
 
   void clearForm() {
-    return formKey.currentState?.reset();
+    formKey.currentState?.reset();
+
+    name.clear();
+    description.clear();
+    address.clear();
+    telephoneNumber.clear();
   }
 
   void submitForm() async {
