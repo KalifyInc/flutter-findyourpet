@@ -1,8 +1,8 @@
+import 'package:FindYourPet/app/view/components/text_input.dart';
 import 'package:flutter/material.dart';
 import 'package:form_builder_image_picker/form_builder_image_picker.dart';
 import 'package:FindYourPet/app/controller/register_controller.dart';
 import 'package:FindYourPet/app/view/components/subtitle.dart';
-import 'package:FindYourPet/app/view/components/text_input.dart';
 
 class FormComponent extends StatefulWidget {
   const FormComponent({super.key});
@@ -72,16 +72,19 @@ class _FormComponentState extends State<FormComponent> {
           const SizedBox(height: 14),
           const SubTitle(title: 'NOME DO ANIMAL'),
           const SizedBox(height: 14),
-          TextInput(
-            hintText: 'Amora',
+          TextInputForm(
             controller: controller.name,
+            maxLength: 15,
+            hintText: 'Nome do Animalzinho',
           ),
           const SizedBox(height: 14),
           const SubTitle(title: 'DESCRIÇÃO DO ANIMAL'),
           const SizedBox(height: 14),
-          TextInput(
-            hintText: 'Husky, pêlos castanhos',
+          TextInputForm(
             controller: controller.description,
+            maxLength: 50,
+            maxLines: 4,
+            hintText: 'Cachorro pequeno, pelo branco...',
           ),
           const SizedBox(height: 14),
           const SubTitle(title: 'QUAL É A SITUAÇÃO?'),
@@ -107,21 +110,22 @@ class _FormComponentState extends State<FormComponent> {
               );
             }).toList(),
           ),
-          // const SelectInput(
-          //   hintText: 'Perdido',
-          // ),
           const SizedBox(height: 14),
           const SubTitle(title: 'ENDEREÇO DO ANIMAL'),
           const SizedBox(height: 14),
-          TextInput(
-              hintText: 'Aldeota Fortaleza/CE', controller: controller.address),
+          TextInputForm(
+            controller: controller.address,
+            maxLength: 20,
+            hintText: 'Seu bairro e cidade',
+          ),
           const SizedBox(height: 14),
           const SubTitle(title: 'NÚMERO DE TELEFONE'),
           const SizedBox(height: 14),
-          TextInput(
-            hintText: '(00) 90000-0000',
+          TextInputForm(
             controller: controller.telephoneNumber,
+            maxLength: 11,
             keyboardType: TextInputType.phone,
+            hintText: '00912345678',
           ),
           const SizedBox(height: 14),
           Row(
@@ -134,9 +138,9 @@ class _FormComponentState extends State<FormComponent> {
                   if (controller.formKey.currentState!.validate()) {
                     controller.formKey.currentState!.save();
 
-                    // If the form is valid, display a snackbar. In the real world,
-                    // you'd often call a server or save the information in a database.
+                    // If the form is valid,save the information in a database.
                     controller.submitForm();
+                    // display a snackbar.
                     ScaffoldMessenger.of(context)
                         .showSnackBar(snackBarSendData);
                   } else {
