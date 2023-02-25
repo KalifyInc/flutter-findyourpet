@@ -3,23 +3,25 @@ import 'package:flutter/services.dart';
 
 import '../../controller/register_controller.dart';
 
-class TextInput extends StatefulWidget {
-  TextInput(
+class TextInputForm extends StatefulWidget {
+  TextInputForm(
       {super.key,
       required this.hintText,
       required this.controller,
       required this.maxLength,
+      this.maxLines,
       this.keyboardType});
   final String hintText;
   final TextEditingController controller;
   final int maxLength;
+  final int? maxLines;
   final TextInputType? keyboardType;
 
   @override
-  State<TextInput> createState() => _TextInputState();
+  State<TextInputForm> createState() => _TextInputFormState();
 }
 
-class _TextInputState extends State<TextInput> {
+class _TextInputFormState extends State<TextInputForm> {
   final controller = RegisterController();
 
   @override
@@ -31,6 +33,7 @@ class _TextInputState extends State<TextInput> {
       keyboardType: widget.keyboardType,
       maxLengthEnforcement: MaxLengthEnforcement.enforced,
       maxLength: widget.maxLength,
+      maxLines: widget.maxLines,
       decoration: InputDecoration(
           border: const OutlineInputBorder(), hintText: widget.hintText),
     );
