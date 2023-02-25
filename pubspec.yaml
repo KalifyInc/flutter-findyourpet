@@ -26,7 +26,6 @@ dependencies:
   cloud_firestore: ^4.4.1
 
   syncfusion_flutter_maps: ^20.4.49
-  image_picker: ^0.8.6+3
   form_builder_image_picker: ^3.1.0
 
 dev_dependencies:
