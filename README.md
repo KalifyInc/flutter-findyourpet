@@ -68,7 +68,7 @@ $ git clone https://github.com/KalifyInc/mobile-findyourpet.git
 # Open the folder
 $ cd mobile-findyourpet
 
-# Needs yarn installed
+# Needs packages installed
 $ flutter pub get
 
 # Run the app
