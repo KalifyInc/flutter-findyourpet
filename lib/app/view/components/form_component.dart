@@ -53,13 +53,12 @@ class _FormComponentState extends State<FormComponent> {
           const SizedBox(height: 14),
           FormBuilderImagePicker(
             name: 'photos',
-            placeholderWidget: const Icon(Icons.photo_library),
+            placeholderWidget: const Card(child: Icon(Icons.photo_library)),
             fit: BoxFit.cover,
             maxImages: 1,
             validator: (value) => controller.validateInput(value),
             onSaved: (newValue) => controller.image = newValue,
-            decoration: const InputDecoration(
-                border: OutlineInputBorder(), filled: true),
+            decoration: const InputDecoration(border: InputBorder.none),
             transformImageWidget: (context, displayImage) => Card(
               // shape: const CircleBorder(),
               // clipBehavior: Clip.antiAlias,
