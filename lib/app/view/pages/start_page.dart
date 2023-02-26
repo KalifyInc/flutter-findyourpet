@@ -61,7 +61,8 @@ class _StartPageState extends State<StartPage> {
           unselectedItemColor: Colors.grey,
           showSelectedLabels: false,
           showUnselectedLabels: false,
-          iconSize: 30,
+          iconSize: 28,
+          selectedIconTheme: const IconThemeData(size: 32.0),
           items: const [
             BottomNavigationBarItem(icon: Icon(Icons.pets), label: ''),
             BottomNavigationBarItem(
