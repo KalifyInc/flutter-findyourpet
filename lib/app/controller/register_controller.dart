@@ -26,7 +26,7 @@ class RegisterController {
     return imageFile;
   }
 
-  Future<void> upload(String path) async {
+  Future<void> uploadImage(String path) async {
     File file = File(path);
     XFile imageFile = getImage();
 
@@ -39,10 +39,10 @@ class RegisterController {
     }
   }
 
-  Future<void> pickandUpload() async {
+  Future<void> pickandUploadImage() async {
     XFile file = getImage();
 
-    await upload(file.path);
+    await uploadImage(file.path);
   }
 
   String? validateInput(value) {
@@ -75,7 +75,7 @@ class RegisterController {
     );
     final dataToSend = pet.toMap();
 
-    pickandUpload();
+    pickandUploadImage();
     _reference.add(dataToSend);
   }
 }
