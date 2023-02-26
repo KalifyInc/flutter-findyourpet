@@ -14,9 +14,21 @@ class _MapsPageState extends State<MapsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Text(
-            'FindYourPet',
-            style: TextStyle(fontSize: 25),
+          title: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              IconButton(
+                icon: const Icon(
+                  Icons.pets_rounded,
+                  color: Colors.white,
+                ),
+                onPressed: () {},
+              ),
+              const Text(
+                'FindYourPet',
+                style: TextStyle(fontSize: 25, fontWeight: FontWeight.w700),
+              ),
+            ],
           ),
           centerTitle: true,
         ),
