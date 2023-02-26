@@ -13,9 +13,21 @@ class _RegisterPageState extends State<RegisterPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Text(
-            'FindYourPet',
-            style: TextStyle(fontSize: 25),
+          title: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              IconButton(
+                icon: const Icon(
+                  Icons.pets_rounded,
+                  color: Colors.white,
+                ),
+                onPressed: () {},
+              ),
+              const Text(
+                'FindYourPet',
+                style: TextStyle(fontSize: 25, fontWeight: FontWeight.w700),
+              ),
+            ],
           ),
           centerTitle: true,
         ),
@@ -23,7 +35,7 @@ class _RegisterPageState extends State<RegisterPage> {
           child: SafeArea(
             child: Center(
               child: Padding(
-                padding: const EdgeInsets.all(24.0),
+                padding: const EdgeInsets.all(20.0),
                 child: Column(
                   children: const [
                     Text(
