@@ -13,7 +13,6 @@ class FormComponent extends StatefulWidget {
 
 class _FormComponentState extends State<FormComponent> {
   final controller = RegisterController();
-
   String? dropdownValue;
 
   static const List<String> listItems = <String>[
@@ -143,6 +142,7 @@ class _FormComponentState extends State<FormComponent> {
                     // display a snackbar.
                     ScaffoldMessenger.of(context)
                         .showSnackBar(snackBarSendData);
+                    controller.clearForm();
                   } else {
                     ScaffoldMessenger.of(context).showSnackBar(snackBarError);
                   }
