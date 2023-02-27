@@ -1,9 +1,12 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 class PetModel {
-  final String id;
+  final String? id;
   final String image;
+  final String imageURL;
   final String name;
   final String description;
   final String status;
@@ -11,8 +14,9 @@ class PetModel {
   final String telephoneNumber;
 
   PetModel({
-    required this.id,
+    this.id,
     required this.image,
+    required this.imageURL,
     required this.name,
     required this.description,
     required this.status,
@@ -20,30 +24,11 @@ class PetModel {
     required this.telephoneNumber,
   });
 
-  PetModel copyWith({
-    String? id,
-    String? image,
-    String? name,
-    String? description,
-    String? status,
-    String? address,
-    String? telephoneNumber,
-  }) {
-    return PetModel(
-      id: id ?? this.id,
-      image: image ?? this.image,
-      name: name ?? this.name,
-      description: description ?? this.description,
-      status: status ?? this.status,
-      address: address ?? this.address,
-      telephoneNumber: telephoneNumber ?? this.telephoneNumber,
-    );
-  }
-
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'id': id,
       'image': image,
+      'imageURL': imageURL,
       'name': name,
       'description': description,
       'status': status,
@@ -56,6 +41,7 @@ class PetModel {
     return PetModel(
       id: map['id'] as String,
       image: map['image'] as String,
+      imageURL: map['imageURL'] as String,
       name: map['name'] as String,
       description: map['description'] as String,
       status: map['status'] as String,
@@ -66,35 +52,28 @@ class PetModel {
 
   String toJson() => json.encode(toMap());
 
-  factory PetModel.fromJson(String source) =>
-      PetModel.fromMap(json.decode(source) as Map<String, dynamic>);
+  static PetModel fromJson(Map<String, dynamic> json) => PetModel(
+        image: json['image'],
+        imageURL: json['imageURL'],
+        name: json['name'],
+        description: json['description'],
+        status: json['status'],
+        address: json['locale'],
+        telephoneNumber: json['contact'],
+      );
 
-  @override
-  String toString() {
-    return 'PetModel(id: $id, image: $image, name: $name, description: $description, status: $status, address: $address, telephoneNumber: $telephoneNumber)';
-  }
-
-  @override
-  bool operator ==(covariant PetModel other) {
-    if (identical(this, other)) return true;
-
-    return other.id == id &&
-        other.image == image &&
-        other.name == name &&
-        other.description == description &&
-        other.status == status &&
-        other.address == address &&
-        other.telephoneNumber == telephoneNumber;
-  }
-
-  @override
-  int get hashCode {
-    return id.hashCode ^
-        image.hashCode ^
-        name.hashCode ^
-        description.hashCode ^
-        status.hashCode ^
-        address.hashCode ^
-        telephoneNumber.hashCode;
+  factory PetModel.fromSnapshot(
+      DocumentSnapshot<Map<String, dynamic>> document) {
+    final data = document.data()!;
+    return PetModel(
+      id: document.id,
+      image: data['image'],
+      imageURL: data['imageURL'],
+      name: data['name'],
+      description: data['description'],
+      status: data['status'],
+      address: data['locale'],
+      telephoneNumber: data['contact'],
+    );
   }
 }
