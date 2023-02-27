@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../models/pet_model.dart';
-import '../components/card_component.dart';
+import '../widgets/card_widget.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -15,7 +15,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   final petRepository = Get.put(PetRepository());
 
-  Widget buildPet(PetModel pet) => CardComponent(
+  Widget buildPet(PetModel pet) => CardWidget(
       imageURL: pet.imageURL,
       name: pet.name,
       description: pet.description,

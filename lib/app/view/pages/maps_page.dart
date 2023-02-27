@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../components/map_component.dart';
+import '../widgets/map_widget.dart';
 
 class MapsPage extends StatefulWidget {
   const MapsPage({super.key});
@@ -36,7 +36,7 @@ class _MapsPageState extends State<MapsPage> {
             child: Container(
           width: MediaQuery.of(context).size.width.roundToDouble(),
           height: MediaQuery.of(context).size.height.roundToDouble(),
-          child: const MapComponent(),
+          child: const MapWidget(),
         )));
     // );
   }

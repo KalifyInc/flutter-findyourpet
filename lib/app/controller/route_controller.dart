@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../view/components/tab_navigator.dart';
+import '../view/widgets/tab_navigator.dart';
 
 class RouteController {
   String currentPage = 'HomePage';

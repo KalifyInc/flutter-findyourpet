@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:FindYourPet/app/view/components/form_component.dart';
+import 'package:FindYourPet/app/view/widgets/form_widget.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
@@ -44,7 +44,7 @@ class _RegisterPageState extends State<RegisterPage> {
                           TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
                     ),
                     SizedBox(height: 20),
-                    FormComponent()
+                    FormWidget()
                   ],
                 ),
               ),

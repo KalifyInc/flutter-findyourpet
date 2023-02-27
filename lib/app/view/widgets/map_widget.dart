@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_maps/maps.dart';
 
-class MapComponent extends StatefulWidget {
-  const MapComponent({super.key});
+class MapWidget extends StatefulWidget {
+  const MapWidget({super.key});
 
   @override
-  State<MapComponent> createState() => _MapComponentState();
+  State<MapWidget> createState() => _MapWidgetState();
 }
 
-class _MapComponentState extends State<MapComponent> {
+class _MapWidgetState extends State<MapWidget> {
   late MapZoomPanBehavior _zoomPanBehavior;
 
   late double latitude = -22.859352775021673;

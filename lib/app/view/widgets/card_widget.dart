@@ -1,12 +1,10 @@
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../controller/register_controller.dart';
 import '../../repository/pet_repository.dart';
 
-class CardComponent extends StatefulWidget {
-  CardComponent(
+class CardWidget extends StatefulWidget {
+  CardWidget(
       {super.key,
       this.image,
       required this.imageURL,
@@ -22,10 +20,10 @@ class CardComponent extends StatefulWidget {
   String map;
 
   @override
-  State<CardComponent> createState() => _CardComponentState();
+  State<CardWidget> createState() => _CardWidgetState();
 }
 
-class _CardComponentState extends State<CardComponent> {
+class _CardWidgetState extends State<CardWidget> {
   final petRepository = Get.put(PetRepository());
 
   @override

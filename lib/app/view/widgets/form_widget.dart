@@ -1,18 +1,18 @@
-import 'package:FindYourPet/app/view/components/text_input.dart';
+import 'package:FindYourPet/app/view/widgets/text_input.dart';
 import 'package:flutter/material.dart';
 import 'package:form_builder_image_picker/form_builder_image_picker.dart';
 import 'package:FindYourPet/app/controller/register_controller.dart';
-import 'package:FindYourPet/app/view/components/subtitle.dart';
+import 'package:FindYourPet/app/view/widgets/subtitle.dart';
 import 'package:get/get.dart';
 
-class FormComponent extends StatefulWidget {
-  const FormComponent({super.key});
+class FormWidget extends StatefulWidget {
+  const FormWidget({super.key});
 
   @override
-  State<FormComponent> createState() => _FormComponentState();
+  State<FormWidget> createState() => _FormWidgetState();
 }
 
-class _FormComponentState extends State<FormComponent> {
+class _FormWidgetState extends State<FormWidget> {
   final controller = Get.put(RegisterController());
   String? dropdownValue;
 
