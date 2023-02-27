@@ -1,49 +1,82 @@
 import 'dart:io';
 
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:FindYourPet/app/repository/pet_repository.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 
 import '../models/pet_model.dart';
 
-class RegisterController {
+class RegisterController extends GetxController {
+  static RegisterController get instance => Get.find();
+
   final formKey = GlobalKey<FormState>();
   List? image;
+  String? imageURL;
   String? status;
   TextEditingController name = TextEditingController();
   TextEditingController description = TextEditingController();
   TextEditingController address = TextEditingController();
   TextEditingController telephoneNumber = TextEditingController();
 
+  final petRepository = Get.put(PetRepository());
+
   final FirebaseStorage storage = FirebaseStorage.instance;
 
-  final _reference = FirebaseFirestore.instance.collection('pets');
-  final _referenceId = FirebaseFirestore.instance.collection('pets').doc();
+  Future<void> createPet(PetModel pet) async {
+    await petRepository.createPet(pet);
+    clearForm();
+  }
 
   XFile getImage() {
     XFile imageFile = image!.single;
     return imageFile;
   }
 
-  Future<void> uploadImage(String path) async {
-    File file = File(path);
-    XFile imageFile = getImage();
+  // Future<void> uploadImage(String path) async {
+  //   File file = File(path);
+  //   XFile imageFile = getImage();
 
-    try {
-      // String ref = 'files/img-${DateTime.now().toString()}.png';
-      String ref = 'files/${imageFile.name}';
-      await storage.ref(ref).putFile(file);
-    } on FirebaseException catch (e) {
-      throw Exception('Erro no upload ${e.code}');
-    }
-  }
+  //   try {
+  //     // String ref = 'files/img-${DateTime.now().toString()}.png';
+  //     String ref = 'files/${imageFile.name}';
+  //     await storage.ref(ref).putFile(file);
+  //     imageURL = await storage.ref(ref).getDownloadURL();
+  //   } on FirebaseException catch (e) {
+  //     throw Exception('Erro no upload ${e.code}');
+  //   }
+  // }
 
-  Future<void> pickandUploadImage() async {
-    XFile file = getImage();
+  // Future<void> pickandUploadImage() async {
+  //   XFile file = getImage();
 
-    await uploadImage(file.path);
-  }
+  //   await uploadImage(file.path);
+  // }
+  // Future<XFile?> getImage() async {
+  //   final ImagePicker _picker = ImagePicker();
+  //   var imageFile = await _picker.pickImage(source: ImageSource.gallery);
+  //   return imageFile;
+  // }
+
+  // Future<void> uploadImage(String path) async {
+  //   File file = File(path);
+
+  //   try {
+  //     // String ref = 'files/img-${DateTime.now().toString()}.png';
+  //     String ref = 'files/img-${DateTime.now().toString()}.jpg';
+  //     await storage.ref(ref).putFile(file);
+  //   } on FirebaseException catch (e) {
+  //     throw Exception('Erro no upload ${e.code}');
+  //   }
+  // }
+
+  // Future<void> pickandUploadImage() async {
+  //   XFile? file = await getImage();
+  //   if (file != null) {
+  //     await uploadImage(file.path);
+  //   }
+  // }
 
   String? validateInput(value) {
     if (value == null || value.isEmpty) {
@@ -62,20 +95,30 @@ class RegisterController {
   }
 
   void submitForm() async {
-    XFile file = getImage();
+    XFile imageFile = getImage();
+    // if (imageFile != null) {
+    File file = File(imageFile.path);
+
+    try {
+      // String ref = 'files/img-${DateTime.now().toString()}.png';
+      String ref = 'files/${imageFile.name}';
+      await storage.ref(ref).putFile(file);
+      imageURL = await storage.ref(ref).getDownloadURL();
+    } on FirebaseException catch (e) {
+      throw Exception('Erro no upload ${e.code}');
+    }
 
     final pet = PetModel(
-      id: _referenceId.id,
-      image: file.name,
+      image: imageFile.name,
+      imageURL: imageURL.toString(),
       name: name.text,
       description: description.text,
       status: status.toString(),
       address: address.text,
       telephoneNumber: telephoneNumber.text,
     );
-    final dataToSend = pet.toMap();
 
-    pickandUploadImage();
-    _reference.add(dataToSend);
+    RegisterController.instance.createPet(pet);
   }
+  // }
 }
