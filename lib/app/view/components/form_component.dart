@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:form_builder_image_picker/form_builder_image_picker.dart';
 import 'package:FindYourPet/app/controller/register_controller.dart';
 import 'package:FindYourPet/app/view/components/subtitle.dart';
+import 'package:get/get.dart';
 
 class FormComponent extends StatefulWidget {
   const FormComponent({super.key});
@@ -12,7 +13,7 @@ class FormComponent extends StatefulWidget {
 }
 
 class _FormComponentState extends State<FormComponent> {
-  final controller = RegisterController();
+  final controller = Get.put(RegisterController());
   String? dropdownValue;
 
   static const List<String> listItems = <String>[
@@ -21,17 +22,6 @@ class _FormComponentState extends State<FormComponent> {
     'Adoação'
   ];
 
-  final snackBarError = const SnackBar(
-    content: Text('Preencha todos os campos!'),
-    backgroundColor: Colors.redAccent,
-    duration: Duration(seconds: 3),
-  );
-
-  final snackBarSendData = const SnackBar(
-    content: Text('Formulário enviado!'),
-    backgroundColor: Colors.greenAccent,
-    duration: Duration(seconds: 3),
-  );
   @override
   void dispose() {
     // Clean up the controller when the widget is disposed.
@@ -54,14 +44,13 @@ class _FormComponentState extends State<FormComponent> {
           FormBuilderImagePicker(
             name: 'photos',
             placeholderWidget: const Card(child: Icon(Icons.photo_library)),
-            fit: BoxFit.cover,
+            fit: BoxFit.fitHeight,
             maxImages: 1,
             validator: (value) => controller.validateInput(value),
             onSaved: (newValue) => controller.image = newValue,
             decoration: const InputDecoration(border: InputBorder.none),
             transformImageWidget: (context, displayImage) => Card(
-              // shape: const CircleBorder(),
-              // clipBehavior: Clip.antiAlias,
+              clipBehavior: Clip.antiAlias,
               child: SizedBox.expand(
                 child: displayImage,
               ),
@@ -88,11 +77,9 @@ class _FormComponentState extends State<FormComponent> {
           const SubTitle(title: 'QUAL É A SITUAÇÃO?'),
           const SizedBox(height: 14),
           DropdownButtonFormField<String>(
-            // key: controller.formKey,
             isExpanded: true,
             icon: const Icon(Icons.arrow_drop_down),
             decoration: const InputDecoration(border: OutlineInputBorder()),
-            // value: dropdownValue,
             validator: (value) => controller.validateInput(value),
             onChanged: (String? value) {
               // This is called when the user selects an item.
@@ -138,12 +125,6 @@ class _FormComponentState extends State<FormComponent> {
 
                     // If the form is valid,save the information in a database.
                     controller.submitForm();
-                    // display a snackbar.
-                    ScaffoldMessenger.of(context)
-                        .showSnackBar(snackBarSendData);
-                    controller.clearForm();
-                  } else {
-                    ScaffoldMessenger.of(context).showSnackBar(snackBarError);
                   }
                 },
                 child: const Text('ENVIAR'),
