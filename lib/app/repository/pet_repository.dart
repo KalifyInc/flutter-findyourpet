@@ -16,6 +16,10 @@ class PetRepository extends GetxController {
     await _db
         .collection('pets')
         .add(pet.toMap())
+        .then((value) => Get.snackbar('Waiting', 'Carregando...',
+            snackPosition: SnackPosition.BOTTOM,
+            backgroundColor: const Color.fromARGB(255, 223, 223, 26),
+            colorText: Colors.white))
         .whenComplete(() => Get.snackbar('Success', 'Formulário enviado!',
             snackPosition: SnackPosition.BOTTOM,
             backgroundColor: Colors.green,
@@ -37,9 +41,9 @@ class PetRepository extends GetxController {
     return petData;
   }
 
-  Future<String> getDownloadURL(String imageName) async {
-    String downloadURL = await storage.ref('files/$imageName').getDownloadURL();
-    print(downloadURL);
-    return downloadURL;
+  Stream<QuerySnapshot> getPetsSnapshot() {
+    final snapshot = _db.collection('pets').snapshots();
+
+    return snapshot;
   }
 }
