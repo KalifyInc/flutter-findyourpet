@@ -9,12 +9,14 @@ class CardWidget extends StatefulWidget {
       this.image,
       required this.imageURL,
       required this.name,
+      required this.status,
       required this.description,
       required this.telephone,
       required this.map});
   String? image;
   String imageURL;
   String name;
+  String status;
   String description;
   String telephone;
   String map;
@@ -44,7 +46,7 @@ class _CardWidgetState extends State<CardWidget> {
                 //     icon: Icon(Icons.abc),
                 //     label: Text('teste')),
                 leading: Image.network(widget.imageURL),
-                title: Text(widget.name),
+                title: Text('${widget.name} - ${widget.status}'),
                 subtitle: Text(widget.description),
               ),
               Row(
