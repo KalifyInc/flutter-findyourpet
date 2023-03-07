@@ -30,9 +30,14 @@ dependencies:
   form_builder_image_picker: ^3.1.0
   image_picker: ^0.8.6+3
 
+  url_launcher: ^6.1.5
+  flutter_launch: ^0.3.0
+
   #gerenciamento de estado
   get: ^4.6.5
+
   connectivity_plus: ^3.0.3
+  font_awesome_flutter: ^10.4.0
 
 dev_dependencies:
   flutter_test:
