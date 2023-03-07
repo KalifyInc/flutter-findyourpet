@@ -58,48 +58,66 @@ class _HomePageState extends State<HomePage> {
                 return const Center(child: CircularProgressIndicator());
               }
 
-              return SafeArea(
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: 16.0, vertical: 20.0),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const Text(
-                        'ÚLTIMOS CADASTRADOS',
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 18),
-                      ),
-                      const SizedBox(height: 20),
-                      Expanded(
-                        flex: 10,
-                        child: SizedBox(
-                          height: 700,
-                          child: ListView(
-                            controller: _controller,
-                            scrollDirection: Axis.vertical,
-                            physics: const AlwaysScrollableScrollPhysics(),
-                            shrinkWrap: true,
-                            children: snapshot.data!.docs
-                                .map((DocumentSnapshot document) {
-                              Map<String, dynamic> data =
-                                  document.data()! as Map<String, dynamic>;
-                              return CardWidget(
-                                imageURL: data['imageURL'],
-                                name: data['name'],
-                                status: data['status'],
-                                description: data['description'],
-                                telephone: data['contact'],
-                                map: data['locale'],
-                              );
-                            }).toList(),
-                          ),
+              if (snapshot.hasData) {
+                return SafeArea(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 16.0, vertical: 20.0),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Text(
+                          'ÚLTIMOS CADASTRADOS',
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 18),
                         ),
-                      )
-                    ],
+                        const SizedBox(height: 20),
+                        Expanded(
+                          flex: 10,
+                          // child: ListView.builder(
+                          //   itemCount: snapshot.data!.docs.length,
+                          //   itemBuilder: (context, index) {
+                          //     var doc = snapshot.data!.docs[index].data;
+                          //     return CardWidget(
+                          //       imageURL: doc['imageURL'],
+                          //       name: doc['name'],
+                          //       status: doc['status'],
+                          //       description: doc['description'],
+                          //       telephone: doc['contact'],
+                          //       map: doc['locale'],
+                          //     );
+                          //   },
+                          // )
+                          child: SizedBox(
+                            height: 700,
+                            child: ListView(
+                              controller: _controller,
+                              scrollDirection: Axis.vertical,
+                              physics: const AlwaysScrollableScrollPhysics(),
+                              shrinkWrap: true,
+                              children: snapshot.data!.docs
+                                  .map((DocumentSnapshot document) {
+                                Map<String, dynamic> data =
+                                    document.data()! as Map<String, dynamic>;
+                                return CardWidget(
+                                  imageURL: data['imageURL'],
+                                  name: data['name'],
+                                  status: data['status'],
+                                  description: data['description'],
+                                  telephone: data['contact'],
+                                  map: data['locale'],
+                                );
+                              }).toList(),
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
                   ),
-                ),
-              );
+                );
+              } else {
+                return const Center(child: CircularProgressIndicator());
+              }
             }));
   }
 }
