@@ -41,18 +41,25 @@ class _FormWidgetState extends State<FormWidget> {
         children: <Widget>[
           const SubTitle(title: 'FOTO DO ANIMAL'),
           const SizedBox(height: 14),
-          FormBuilderImagePicker(
-            name: 'photos',
-            placeholderWidget: const Card(child: Icon(Icons.photo_library)),
-            fit: BoxFit.fitHeight,
-            maxImages: 1,
-            validator: (value) => controller.validateInput(value),
-            onSaved: (newValue) => controller.image = newValue,
-            decoration: const InputDecoration(border: InputBorder.none),
-            transformImageWidget: (context, displayImage) => Card(
-              clipBehavior: Clip.antiAlias,
-              child: SizedBox.expand(
-                child: displayImage,
+          Center(
+            child: SizedBox(
+              width: 200,
+              child: FormBuilderImagePicker(
+                name: 'photos',
+                placeholderWidget: const Card(
+                  child: Icon(Icons.photo_library),
+                ),
+                fit: BoxFit.cover,
+                maxImages: 1,
+                validator: (value) => controller.validateInput(value),
+                onSaved: (newValue) => controller.image = newValue,
+                decoration: const InputDecoration(border: InputBorder.none),
+                transformImageWidget: (context, displayImage) => Card(
+                  clipBehavior: Clip.antiAlias,
+                  child: SizedBox.expand(
+                    child: displayImage,
+                  ),
+                ),
               ),
             ),
           ),
