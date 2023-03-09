@@ -52,7 +52,6 @@ class _CardInsidePageState extends State<CardInsidePage> {
               padding: const EdgeInsets.symmetric(vertical: 24.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                // mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 24.0),
@@ -104,18 +103,6 @@ class _CardInsidePageState extends State<CardInsidePage> {
                               foregroundColor: Colors.white,
                             ),
                             onPressed: () async {
-                              // await FlutterLaunch.launchWhatsapp(
-                              //         phone: '558592923081', message: 'Teste')
-                              //     .whenComplete(() => Get.snackbar(
-                              //         'Carregou', 'Deu certo?',
-                              //         snackPosition: SnackPosition.BOTTOM,
-                              //         backgroundColor: Colors.blueAccent,
-                              //         colorText: Colors.white))
-                              //     .onError((error, stackTrace) => Get.snackbar(
-                              //         'Error', error.toString(),
-                              //         snackPosition: SnackPosition.BOTTOM,
-                              //         backgroundColor: Colors.redAccent,
-                              //         colorText: Colors.white));
                               await whatsappController.openWhatsapp(
                                   context: context,
                                   telephoneNumber: widget.telephone);
