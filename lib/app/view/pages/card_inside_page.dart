@@ -1,9 +1,8 @@
-import 'package:FindYourPet/app/view/widgets/subtitle.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_launch/flutter_launch.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
-import 'package:get/get_connect/http/src/utils/utils.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
+import 'package:FindYourPet/app/view/widgets/subtitle.dart';
 
 import '../../controller/whatsapp_controller.dart';
 
