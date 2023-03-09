@@ -238,14 +238,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "7.7.0"
-  flutter_launch:
-    dependency: "direct main"
-    description:
-      name: flutter_launch
-      sha256: "5460030667d04ec863355ec1113594e907fcd724f83b4cf8b50dd6ae58b94155"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.3.0"
   flutter_launcher_icons:
     dependency: "direct dev"
     description:
