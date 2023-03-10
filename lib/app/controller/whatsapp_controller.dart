@@ -14,7 +14,7 @@ class WhatsAppController extends GetxController {
     if (await canLaunchUrl(whatsappURL)) {
       await launchUrl(whatsappURL, mode: LaunchMode.externalApplication);
     } else {
-      Get.snackbar('Error', '',
+      Get.snackbar('Erro!', 'Tente novamente mais tarde!',
           snackPosition: SnackPosition.BOTTOM,
           backgroundColor: Colors.redAccent,
           colorText: Colors.white);

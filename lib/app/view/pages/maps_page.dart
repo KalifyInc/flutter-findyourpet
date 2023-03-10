@@ -33,7 +33,7 @@ class _MapsPageState extends State<MapsPage> {
           centerTitle: true,
         ),
         body: SingleChildScrollView(
-            child: Container(
+            child: SizedBox(
           width: MediaQuery.of(context).size.width.roundToDouble(),
           height: MediaQuery.of(context).size.height.roundToDouble(),
           child: const MapWidget(),

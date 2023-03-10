@@ -132,6 +132,11 @@ class _FormWidgetState extends State<FormWidget> {
 
                     // If the form is valid,save the information in a database.
                     controller.submitForm();
+                  } else {
+                    Get.snackbar('Atenção!', 'Preencha todos os campos!',
+                        snackPosition: SnackPosition.BOTTOM,
+                        backgroundColor: Colors.redAccent,
+                        colorText: Colors.white);
                   }
                 },
                 child: const Text('ENVIAR'),

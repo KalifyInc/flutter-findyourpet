@@ -16,7 +16,7 @@ class PetRepository extends GetxController {
     await _db
         .collection('pets')
         .add(pet.toMap())
-        .then((value) => Get.snackbar('Waiting', 'Carregando...',
+        .then((value) => Get.snackbar('Espere um momento', 'Carregando...',
             snackPosition: SnackPosition.BOTTOM,
             backgroundColor: const Color.fromARGB(255, 223, 223, 26),
             colorText: Colors.white))
@@ -25,7 +25,7 @@ class PetRepository extends GetxController {
             backgroundColor: Colors.green,
             colorText: Colors.white))
         .catchError((error, stackTrace) {
-      Get.snackbar('Error', 'Tente novamente!',
+      Get.snackbar('Erro!', 'Tente novamente mais tarde!',
           snackPosition: SnackPosition.BOTTOM,
           backgroundColor: Colors.redAccent,
           colorText: Colors.white);
