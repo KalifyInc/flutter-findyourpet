@@ -34,50 +34,6 @@ class RegisterController extends GetxController {
     return imageFile;
   }
 
-  // Future<void> uploadImage(String path) async {
-  //   File file = File(path);
-  //   XFile imageFile = getImage();
-
-  //   try {
-  //     // String ref = 'files/img-${DateTime.now().toString()}.png';
-  //     String ref = 'files/${imageFile.name}';
-  //     await storage.ref(ref).putFile(file);
-  //     imageURL = await storage.ref(ref).getDownloadURL();
-  //   } on FirebaseException catch (e) {
-  //     throw Exception('Erro no upload ${e.code}');
-  //   }
-  // }
-
-  // Future<void> pickandUploadImage() async {
-  //   XFile file = getImage();
-
-  //   await uploadImage(file.path);
-  // }
-  // Future<XFile?> getImage() async {
-  //   final ImagePicker _picker = ImagePicker();
-  //   var imageFile = await _picker.pickImage(source: ImageSource.gallery);
-  //   return imageFile;
-  // }
-
-  // Future<void> uploadImage(String path) async {
-  //   File file = File(path);
-
-  //   try {
-  //     // String ref = 'files/img-${DateTime.now().toString()}.png';
-  //     String ref = 'files/img-${DateTime.now().toString()}.jpg';
-  //     await storage.ref(ref).putFile(file);
-  //   } on FirebaseException catch (e) {
-  //     throw Exception('Erro no upload ${e.code}');
-  //   }
-  // }
-
-  // Future<void> pickandUploadImage() async {
-  //   XFile? file = await getImage();
-  //   if (file != null) {
-  //     await uploadImage(file.path);
-  //   }
-  // }
-
   String? validateInput(value) {
     if (value == null || value.isEmpty) {
       return 'Campo obrigatório!';
@@ -96,13 +52,14 @@ class RegisterController extends GetxController {
 
   void submitForm() async {
     XFile imageFile = getImage();
-    // if (imageFile != null) {
     File file = File(imageFile.path);
 
     try {
       // String ref = 'files/img-${DateTime.now().toString()}.png';
       String ref = 'files/${imageFile.name}';
+      //storage thefile on storage Firebase
       await storage.ref(ref).putFile(file);
+      // get the download url from storageFirebase
       imageURL = await storage.ref(ref).getDownloadURL();
     } on FirebaseException catch (e) {
       throw Exception('Erro no upload ${e.code}');
@@ -120,5 +77,4 @@ class RegisterController extends GetxController {
 
     RegisterController.instance.createPet(pet);
   }
-  // }
 }
