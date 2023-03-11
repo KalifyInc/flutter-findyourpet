@@ -9,7 +9,7 @@ class AppTheme {
           systemOverlayStyle: SystemUiOverlayStyle.light),
       brightness: Brightness.dark,
       canvasColor: const Color.fromRGBO(40, 42, 54, 1),
-      bottomNavigationBarTheme: const BottomNavigationBarThemeData(
-        backgroundColor: Colors.black12,
-      ));
+      cardColor: const Color.fromRGBO(26, 26, 34, 1),
+      bottomNavigationBarTheme:
+          const BottomNavigationBarThemeData(backgroundColor: Colors.black12));
 }
