@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 
 import '../../controller/whatsapp_controller.dart';
@@ -54,46 +53,58 @@ class _CardWidgetState extends State<CardWidget> {
             );
           },
           child: Column(
-            mainAxisSize: MainAxisSize.min,
+            mainAxisSize: MainAxisSize.max,
             children: <Widget>[
               ListTile(
                 leading: Container(
-                    width: 60,
-                    height: 100,
+                    width: 100,
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(4.0),
-                        // border: Border(color: Colors.black),
                         image: DecorationImage(
-                            fit: BoxFit.fill,
+                            fit: BoxFit.cover,
                             image: NetworkImage(widget.imageURL)))),
-                // leading:
-                //     Image.network(widget.imageURL, fit: BoxFit.fill, width: 60),
                 title: Text('${widget.name} - ${widget.status}'),
-                subtitle: Text(widget.description),
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: <Widget>[
-                  const SizedBox(width: 6),
-                  TextButton.icon(
-                    icon: const FaIcon(
-                      FontAwesomeIcons.whatsapp,
-                      size: 16,
+                // subtitle: Column(
+                //   crossAxisAlignment: CrossAxisAlignment.start,
+                //   children: [
+                //     Text(widget.description),
+                //     Padding(
+                //       padding: const EdgeInsets.only(right: 32.0),
+                //       child: TextButton.icon(
+                //         onPressed: () {},
+                //         icon: const Icon(Icons.location_pin, size: 16),
+                //         label: Text(widget.map),
+                //       ),
+                //     ),
+                //   ],
+                // ),
+                subtitle: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(widget.description),
+                    const SizedBox(height: 16),
+                    Row(
+                      children: [
+                        const Icon(
+                          Icons.location_pin,
+                          size: 16,
+                          color: Colors.teal,
+                        ),
+                        const SizedBox(
+                          width: 4,
+                        ),
+                        Text(
+                          widget.map,
+                          style: const TextStyle(
+                            fontWeight: FontWeight.w600,
+                            color: Colors.teal,
+                          ),
+                        ),
+                      ],
                     ),
-                    label: Text(widget.telephone),
-                    onPressed: () async {
-                      /* ... */
-                      await whatsappController.openWhatsapp(
-                          context: context, telephoneNumber: widget.telephone);
-                    },
-                  ),
-                  TextButton.icon(
-                    onPressed: () {},
-                    icon: const Icon(Icons.location_pin, size: 16),
-                    label: Text(widget.map),
-                  ),
-                  const SizedBox(width: 6),
-                ],
+                    const SizedBox(height: 10)
+                  ],
+                ),
               ),
             ],
           ),
