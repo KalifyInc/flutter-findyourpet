@@ -19,7 +19,7 @@ class _FormWidgetState extends State<FormWidget> {
   static const List<String> listItems = <String>[
     'Perdido',
     'Encontrado',
-    'Adoação'
+    'Adoção'
   ];
 
   @override
