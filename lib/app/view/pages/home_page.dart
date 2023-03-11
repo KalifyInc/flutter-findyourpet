@@ -16,8 +16,6 @@ class _HomePageState extends State<HomePage> {
   final petRepository = Get.put(PetRepository());
   late Stream<QuerySnapshot> _petsStream;
 
-  ScrollController _controller = new ScrollController();
-
   @override
   void initState() {
     super.initState();
@@ -73,41 +71,22 @@ class _HomePageState extends State<HomePage> {
                         ),
                         const SizedBox(height: 20),
                         Expanded(
-                          flex: 10,
-                          // child: ListView.builder(
-                          //   itemCount: snapshot.data!.docs.length,
-                          //   itemBuilder: (context, index) {
-                          //     var doc = snapshot.data!.docs[index].data;
-                          //     return CardWidget(
-                          //       imageURL: doc['imageURL'],
-                          //       name: doc['name'],
-                          //       status: doc['status'],
-                          //       description: doc['description'],
-                          //       telephone: doc['contact'],
-                          //       map: doc['locale'],
-                          //     );
-                          //   },
-                          // )
-                          child: SizedBox(
-                            height: 700,
-                            child: ListView(
-                              controller: _controller,
-                              scrollDirection: Axis.vertical,
-                              physics: const AlwaysScrollableScrollPhysics(),
-                              shrinkWrap: true,
-                              children: snapshot.data!.docs
-                                  .map((DocumentSnapshot document) {
-                                Map<String, dynamic> data =
-                                    document.data()! as Map<String, dynamic>;
+                          child: RefreshIndicator(
+                            onRefresh: () async =>
+                                petRepository.getPetsSnapshot(),
+                            child: ListView.builder(
+                              itemCount: snapshot.data!.docs.length,
+                              itemBuilder: (context, index) {
+                                var doc = snapshot.data!.docs[index];
                                 return CardWidget(
-                                  imageURL: data['imageURL'],
-                                  name: data['name'],
-                                  status: data['status'],
-                                  description: data['description'],
-                                  telephone: data['contact'],
-                                  map: data['locale'],
+                                  imageURL: doc['imageURL'],
+                                  name: doc['name'],
+                                  status: doc['status'],
+                                  description: doc['description'],
+                                  telephone: doc['contact'],
+                                  map: doc['locale'],
                                 );
-                              }).toList(),
+                              },
                             ),
                           ),
                         )
