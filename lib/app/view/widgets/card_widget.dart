@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
-import '../../controller/whatsapp_controller.dart';
 import '../../repository/pet_repository.dart';
 import '../pages/card_inside_page.dart';
 
@@ -28,8 +26,7 @@ class CardWidget extends StatefulWidget {
 }
 
 class _CardWidgetState extends State<CardWidget> {
-  final petRepository = Get.put(PetRepository());
-  final whatsappController = Get.put(WhatsAppController());
+  final petRepository = PetRepository();
 
   @override
   Widget build(BuildContext context) {
@@ -64,20 +61,6 @@ class _CardWidgetState extends State<CardWidget> {
                             fit: BoxFit.cover,
                             image: NetworkImage(widget.imageURL)))),
                 title: Text('${widget.name} - ${widget.status}'),
-                // subtitle: Column(
-                //   crossAxisAlignment: CrossAxisAlignment.start,
-                //   children: [
-                //     Text(widget.description),
-                //     Padding(
-                //       padding: const EdgeInsets.only(right: 32.0),
-                //       child: TextButton.icon(
-                //         onPressed: () {},
-                //         icon: const Icon(Icons.location_pin, size: 16),
-                //         label: Text(widget.map),
-                //       ),
-                //     ),
-                //   ],
-                // ),
                 subtitle: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [

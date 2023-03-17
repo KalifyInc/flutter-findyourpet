@@ -62,18 +62,16 @@ class PetModel {
         telephoneNumber: json['contact'],
       );
 
-  factory PetModel.fromSnapshot(
-      DocumentSnapshot<Map<String, dynamic>> document) {
-    final data = document.data()!;
+  static PetModel fromSnapshot(DocumentSnapshot document) {
     return PetModel(
       id: document.id,
-      image: data['image'],
-      imageURL: data['imageURL'],
-      name: data['name'],
-      description: data['description'],
-      status: data['status'],
-      address: data['locale'],
-      telephoneNumber: data['contact'],
+      image: document['image'],
+      imageURL: document['imageURL'],
+      name: document['name'],
+      description: document['description'],
+      status: document['status'],
+      address: document['locale'],
+      telephoneNumber: document['contact'],
     );
   }
 }

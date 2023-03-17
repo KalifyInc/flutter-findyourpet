@@ -3,14 +3,11 @@ import 'dart:io';
 import 'package:FindYourPet/app/repository/pet_repository.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 
 import '../models/pet_model.dart';
 
-class RegisterController extends GetxController {
-  static RegisterController get instance => Get.find();
-
+class RegisterController {
   final formKey = GlobalKey<FormState>();
   List? image;
   String? imageURL;
@@ -20,7 +17,7 @@ class RegisterController extends GetxController {
   TextEditingController address = TextEditingController();
   TextEditingController telephoneNumber = TextEditingController();
 
-  final petRepository = Get.put(PetRepository());
+  final petRepository = PetRepository();
 
   final FirebaseStorage storage = FirebaseStorage.instance;
 
@@ -75,6 +72,6 @@ class RegisterController extends GetxController {
       telephoneNumber: telephoneNumber.text,
     );
 
-    RegisterController.instance.createPet(pet);
+    createPet(pet);
   }
 }

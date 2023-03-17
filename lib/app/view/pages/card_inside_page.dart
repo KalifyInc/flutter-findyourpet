@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'package:FindYourPet/app/view/widgets/subtitle.dart';
@@ -29,7 +28,7 @@ class CardInsidePage extends StatefulWidget {
 }
 
 class _CardInsidePageState extends State<CardInsidePage> {
-  final whatsappController = Get.put(WhatsAppController());
+  final whatsappController = WhatsAppController();
 
   @override
   Widget build(BuildContext context) {
@@ -103,9 +102,20 @@ class _CardInsidePageState extends State<CardInsidePage> {
                               foregroundColor: Colors.white,
                             ),
                             onPressed: () async {
-                              await whatsappController.openWhatsapp(
-                                  context: context,
-                                  telephoneNumber: widget.telephone);
+                              try {
+                                await whatsappController.openWhatsapp(
+                                    context: context,
+                                    telephoneNumber: widget.telephone);
+                              } catch (e) {
+                                ScaffoldMessenger.of(context)
+                                    .showSnackBar(SnackBar(
+                                  content: Text(
+                                    'Erro: ${e.toString()}',
+                                    style: const TextStyle(color: Colors.white),
+                                  ),
+                                  backgroundColor: Colors.redAccent,
+                                ));
+                              }
                             },
                           ),
                         ),
