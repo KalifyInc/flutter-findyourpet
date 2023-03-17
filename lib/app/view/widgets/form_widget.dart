@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:form_builder_image_picker/form_builder_image_picker.dart';
 import 'package:FindYourPet/app/controller/register_controller.dart';
 import 'package:FindYourPet/app/view/widgets/subtitle.dart';
-import 'package:get/get.dart';
+
+import 'global_snackbar_widget.dart';
 
 class FormWidget extends StatefulWidget {
   const FormWidget({super.key});
@@ -13,7 +14,7 @@ class FormWidget extends StatefulWidget {
 }
 
 class _FormWidgetState extends State<FormWidget> {
-  final controller = Get.put(RegisterController());
+  final controller = RegisterController();
   String? dropdownValue;
 
   static const List<String> listItems = <String>[
@@ -129,14 +130,19 @@ class _FormWidgetState extends State<FormWidget> {
                   // Validate returns true if the form is valid, or false otherwise.
                   if (controller.formKey.currentState!.validate()) {
                     controller.formKey.currentState!.save();
+                    try {
+                      controller.submitForm();
+                      GlobalSnackBarWidget.show(
+                          context, 'Formulário enviado!', Colors.green);
+                    } catch (e) {
+                      GlobalSnackBarWidget.show(
+                          context, 'Erro: ${e.toString()}', Colors.redAccent);
+                    }
 
                     // If the form is valid,save the information in a database.
-                    controller.submitForm();
                   } else {
-                    Get.snackbar('Atenção!', 'Preencha todos os campos!',
-                        snackPosition: SnackPosition.BOTTOM,
-                        backgroundColor: Colors.redAccent,
-                        colorText: Colors.white);
+                    GlobalSnackBarWidget.show(
+                        context, 'Preencha todos os campos!', Colors.redAccent);
                   }
                 },
                 child: const Text('ENVIAR'),
