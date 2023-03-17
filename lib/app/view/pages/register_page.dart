@@ -35,7 +35,7 @@ class _RegisterPageState extends State<RegisterPage> {
           child: SafeArea(
             child: Center(
               child: Padding(
-                padding: const EdgeInsets.all(20.0),
+                padding: const EdgeInsets.all(16.0),
                 child: Column(
                   children: const [
                     Text(
@@ -43,7 +43,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       style:
                           TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
                     ),
-                    SizedBox(height: 20),
+                    SizedBox(height: 16),
                     FormWidget()
                   ],
                 ),
