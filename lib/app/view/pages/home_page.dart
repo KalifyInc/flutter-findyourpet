@@ -1,6 +1,4 @@
 import 'package:FindYourPet/app/repository/pet_repository.dart';
-import 'package:FindYourPet/app/view/pages/loading_page.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 import '../../models/pet_model.dart';
@@ -15,12 +13,20 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final petRepository = PetRepository();
-  late Stream<QuerySnapshot> _petsStream;
+
+  Widget buildPet(PetModel pet) => CardWidget(
+        imageURL: pet.imageURL,
+        name: pet.name,
+        status: pet.status,
+        description: pet.description,
+        telephone: pet.telephoneNumber,
+        map: pet.address,
+      );
 
   @override
   void initState() {
     super.initState();
-    _petsStream = petRepository.getPetsSnapshot();
+    petRepository.getAllPets();
   }
 
   @override
@@ -45,60 +51,48 @@ class _HomePageState extends State<HomePage> {
         ),
         centerTitle: true,
       ),
-      body: StreamBuilder<QuerySnapshot>(
-          stream: _petsStream,
-          builder:
-              (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
-            if (snapshot.hasError) {
-              return Center(child: Text(snapshot.error.toString()));
-            }
-
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              return const Center(child: CircularProgressIndicator());
-            }
-
-            if (snapshot.hasData) {
-              return SafeArea(
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: 16.0, vertical: 20.0),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const Text(
-                        'ÚLTIMOS CADASTRADOS',
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 18),
-                      ),
-                      const SizedBox(height: 20),
-                      Expanded(
-                        child: RefreshIndicator(
-                          onRefresh: () async =>
-                              petRepository.getPetsSnapshot(),
-                          child: ListView.builder(
-                            itemCount: snapshot.data!.docs.length,
-                            itemBuilder: (context, index) {
-                              var doc = snapshot.data!.docs[index];
-                              return CardWidget(
-                                imageURL: doc['imageURL'],
-                                name: doc['name'],
-                                status: doc['status'],
-                                description: doc['description'],
-                                telephone: doc['contact'],
-                                map: doc['locale'],
-                              );
-                            },
-                          ),
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-              );
-            } else {
-              return const Center(child: CircularProgressIndicator());
-            }
-          }),
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 20.0),
+        child: Center(
+          child: Column(
+            children: [
+              const Text(
+                'ÚLTIMOS CADASTRADOS',
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+              ),
+              const SizedBox(height: 20),
+              FutureBuilder<List<PetModel>>(
+                future: petRepository.getAllPets(),
+                builder: (context, snapshots) {
+                  if (snapshots.connectionState == ConnectionState.done) {
+                    if (snapshots.hasData) {
+                      final petData = snapshots.data!;
+                      return RefreshIndicator(
+                        onRefresh: () async {
+                          setState(() {
+                            petRepository.getAllPets();
+                          });
+                        },
+                        child: ListView(
+                            shrinkWrap: true,
+                            scrollDirection: Axis.vertical,
+                            children: petData.map(buildPet).toList()),
+                      );
+                    } else if (snapshots.hasError) {
+                      return Center(child: Text(snapshots.error.toString()));
+                    } else {
+                      return const Center(
+                          child: Text('Algo de errado não está certo!'));
+                    }
+                  } else {
+                    return const Center(child: CircularProgressIndicator());
+                  }
+                },
+              )
+            ],
+          ),
+        ),
+      ),
     );
   }
 }
