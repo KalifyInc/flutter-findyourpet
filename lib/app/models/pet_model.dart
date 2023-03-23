@@ -12,6 +12,7 @@ class PetModel {
   final String status;
   final String address;
   final String telephoneNumber;
+  final String createdAt;
 
   PetModel({
     this.id,
@@ -22,6 +23,7 @@ class PetModel {
     required this.status,
     required this.address,
     required this.telephoneNumber,
+    required this.createdAt,
   });
 
   Map<String, dynamic> toMap() {
@@ -34,6 +36,7 @@ class PetModel {
       'status': status,
       'locale': address,
       'contact': telephoneNumber,
+      'createdAt': createdAt,
     };
   }
 
@@ -47,6 +50,7 @@ class PetModel {
       status: map['status'] as String,
       address: map['address'] as String,
       telephoneNumber: map['telephoneNumber'] as String,
+      createdAt: map['createdAt'] as String,
     );
   }
 
@@ -60,6 +64,7 @@ class PetModel {
         status: json['status'],
         address: json['locale'],
         telephoneNumber: json['contact'],
+        createdAt: json['createdAt'],
       );
 
   static PetModel fromSnapshot(DocumentSnapshot document) {
@@ -72,6 +77,7 @@ class PetModel {
       status: document['status'],
       address: document['locale'],
       telephoneNumber: document['contact'],
+      createdAt: document['createdAt'],
     );
   }
 }
