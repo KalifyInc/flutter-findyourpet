@@ -22,8 +22,11 @@ class RegisterController {
   final FirebaseStorage storage = FirebaseStorage.instance;
 
   Future<void> createPet(PetModel pet) async {
-    await petRepository.createPet(pet);
-    clearForm();
+    try {
+      await petRepository.createPet(pet);
+    } finally {
+      clearForm();
+    }
   }
 
   XFile getImage() {
@@ -50,6 +53,7 @@ class RegisterController {
   void submitForm() async {
     XFile imageFile = getImage();
     File file = File(imageFile.path);
+    DateTime createdAtTime = DateTime.now();
 
     try {
       // String ref = 'files/img-${DateTime.now().toString()}.png';
@@ -70,6 +74,7 @@ class RegisterController {
       status: status.toString(),
       address: address.text,
       telephoneNumber: telephoneNumber.text,
+      createdAt: createdAtTime.toString(),
     );
 
     createPet(pet);
