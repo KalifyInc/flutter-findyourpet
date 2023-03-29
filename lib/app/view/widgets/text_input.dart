@@ -4,7 +4,7 @@ import 'package:flutter/services.dart';
 import '../../controller/register_controller.dart';
 
 class TextInputForm extends StatefulWidget {
-  TextInputForm(
+  const TextInputForm(
       {super.key,
       required this.hintText,
       required this.controller,

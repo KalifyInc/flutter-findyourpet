@@ -5,7 +5,7 @@ import 'package:FindYourPet/app/view/widgets/subtitle.dart';
 
 import '../../controller/whatsapp_controller.dart';
 
-class CardInsidePage extends StatefulWidget {
+class CardInsidePage extends StatelessWidget {
   CardInsidePage(
       {super.key,
       this.image,
@@ -15,19 +15,14 @@ class CardInsidePage extends StatefulWidget {
       required this.description,
       required this.telephone,
       required this.map});
-  String? image;
-  String imageURL;
-  String name;
-  String status;
-  String description;
-  String telephone;
-  String map;
+  final String? image;
+  final String imageURL;
+  final String name;
+  final String status;
+  final String description;
+  final String telephone;
+  final String map;
 
-  @override
-  State<CardInsidePage> createState() => _CardInsidePageState();
-}
-
-class _CardInsidePageState extends State<CardInsidePage> {
   final whatsappController = WhatsAppController();
 
   @override
@@ -45,8 +40,7 @@ class _CardInsidePageState extends State<CardInsidePage> {
                     borderRadius: BorderRadius.circular(16.0),
                     // border: Border(color: Colors.black),
                     image: DecorationImage(
-                        fit: BoxFit.cover,
-                        image: NetworkImage(widget.imageURL)))),
+                        fit: BoxFit.cover, image: NetworkImage(imageURL)))),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 24.0),
               child: Column(
@@ -55,7 +49,7 @@ class _CardInsidePageState extends State<CardInsidePage> {
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 24.0),
                     child: Text(
-                      widget.name,
+                      name,
                       style: const TextStyle(
                           fontSize: 30, fontWeight: FontWeight.bold),
                     ),
@@ -66,7 +60,7 @@ class _CardInsidePageState extends State<CardInsidePage> {
                       onPressed: () {},
                       icon: const Icon(Icons.location_pin, size: 16),
                       label: Text(
-                        'Está na região de: ${widget.map}',
+                        'Está na região de: $map',
                       ),
                     ),
                   ),
@@ -79,10 +73,10 @@ class _CardInsidePageState extends State<CardInsidePage> {
                         const SubTitle(
                           title: 'Situação do animal',
                         ),
-                        Text(widget.status),
+                        Text(status),
                         const SizedBox(height: 12),
                         const SubTitle(title: 'Descrição'),
-                        Text(widget.description),
+                        Text(description),
                         const SizedBox(height: 24),
                         Center(
                           child: TextButton.icon(
@@ -105,7 +99,7 @@ class _CardInsidePageState extends State<CardInsidePage> {
                               try {
                                 await whatsappController.openWhatsapp(
                                     context: context,
-                                    telephoneNumber: widget.telephone);
+                                    telephoneNumber: telephone);
                               } catch (e) {
                                 ScaffoldMessenger.of(context)
                                     .showSnackBar(SnackBar(

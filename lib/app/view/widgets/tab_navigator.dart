@@ -15,7 +15,8 @@ class TabNavigatorRoutes {
 }
 
 class TabNavigator extends StatelessWidget {
-  const TabNavigator({required this.navigatorKey, required this.tabItem});
+  const TabNavigator(
+      {super.key, required this.navigatorKey, required this.tabItem});
   final GlobalKey<NavigatorState>? navigatorKey;
   final String tabItem;
 

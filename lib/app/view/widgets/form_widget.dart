@@ -135,7 +135,7 @@ class _FormWidgetState extends State<FormWidget> {
                       controller.submitForm();
 
                       GlobalSnackBarWidget.show(context, 'Carregando...',
-                          Color.fromARGB(255, 212, 195, 42));
+                          const Color.fromARGB(255, 212, 195, 42));
                     } catch (e) {
                       GlobalSnackBarWidget.show(
                           context, 'Erro: ${e.toString()}', Colors.redAccent);

@@ -4,7 +4,7 @@ import '../../repository/pet_repository.dart';
 import '../pages/card_inside_page.dart';
 
 class CardWidget extends StatefulWidget {
-  CardWidget(
+  const CardWidget(
       {super.key,
       this.image,
       required this.imageURL,
@@ -13,13 +13,13 @@ class CardWidget extends StatefulWidget {
       required this.description,
       required this.telephone,
       required this.map});
-  String? image;
-  String imageURL;
-  String name;
-  String status;
-  String description;
-  String telephone;
-  String map;
+  final String? image;
+  final String imageURL;
+  final String name;
+  final String status;
+  final String description;
+  final String telephone;
+  final String map;
 
   @override
   State<CardWidget> createState() => _CardWidgetState();
