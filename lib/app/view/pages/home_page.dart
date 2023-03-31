@@ -1,4 +1,5 @@
 import 'package:FindYourPet/app/repository/pet_repository.dart';
+import 'package:firebase_pagination/firebase_pagination.dart';
 import 'package:flutter/material.dart';
 
 import '../../models/pet_model.dart';
@@ -13,15 +14,6 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final petRepository = PetRepository();
-
-  Widget buildPet(PetModel pet) => CardWidget(
-        imageURL: pet.imageURL,
-        name: pet.name,
-        status: pet.status,
-        description: pet.description,
-        telephone: pet.telephoneNumber,
-        map: pet.address,
-      );
 
   @override
   void initState() {
@@ -61,34 +53,56 @@ class _HomePageState extends State<HomePage> {
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
               ),
               const SizedBox(height: 20),
-              FutureBuilder<List<PetModel>>(
-                future: petRepository.getAllPets(),
-                builder: (context, snapshots) {
-                  if (snapshots.connectionState == ConnectionState.done) {
-                    if (snapshots.hasData) {
-                      final petData = snapshots.data!;
-                      return RefreshIndicator(
-                        onRefresh: () async {
-                          setState(() {
-                            petRepository.getAllPets();
-                          });
-                        },
-                        child: ListView(
-                            shrinkWrap: true,
-                            scrollDirection: Axis.vertical,
-                            children: petData.map(buildPet).toList()),
-                      );
-                    } else if (snapshots.hasError) {
-                      return Center(child: Text(snapshots.error.toString()));
+              Expanded(
+                child: FutureBuilder<List<PetModel>>(
+                  future: petRepository.getAllPets(),
+                  builder: (context, snapshots) {
+                    if (snapshots.connectionState == ConnectionState.done) {
+                      if (snapshots.hasData) {
+                        final petData = snapshots.data!;
+                        return RefreshIndicator(
+                          onRefresh: () async {
+                            setState(() {
+                              petRepository.getAllPets();
+                            });
+                          },
+                          child: FirestorePagination(
+                              query: petRepository.query(),
+                              limit: 7,
+                              onEmpty: const Center(
+                                child: Text('Cart is empty'),
+                              ),
+                              bottomLoader: const Center(
+                                child: CircularProgressIndicator(
+                                  strokeWidth: 3,
+                                  color: Colors.teal,
+                                ),
+                              ),
+                              itemBuilder: (context, documentSnapshot, index) {
+                                final data = documentSnapshot.data()
+                                    as Map<String, dynamic>;
+                                return CardWidget(
+                                  imageURL: data['imageURL'],
+                                  name: data['name'],
+                                  status: data['status'],
+                                  description: data['description'],
+                                  telephone: data['contact'],
+                                  map: data['locale'],
+                                );
+                              }),
+                        );
+                      } else if (snapshots.hasError) {
+                        return Center(child: Text(snapshots.error.toString()));
+                      } else {
+                        return const Center(
+                            child: Text('Algo de errado não está certo!'));
+                      }
                     } else {
-                      return const Center(
-                          child: Text('Algo de errado não está certo!'));
+                      return const Center(child: CircularProgressIndicator());
                     }
-                  } else {
-                    return const Center(child: CircularProgressIndicator());
-                  }
-                },
-              )
+                  },
+                ),
+              ),
             ],
           ),
         ),
