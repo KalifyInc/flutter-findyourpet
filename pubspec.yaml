@@ -33,6 +33,9 @@ dependencies:
 
   url_launcher: ^6.1.5
 
+  # pagination
+  firebase_pagination: ^3.0.0
+
   connectivity_plus: ^3.0.3
   font_awesome_flutter: ^10.4.0
 
