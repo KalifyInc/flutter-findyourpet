@@ -10,21 +10,13 @@ class PetRepository {
 
   // Store user in FireStore
   createPet(PetModel pet) async {
-    await _db
-        .collection('pets')
-        .add(pet.toMap())
-        .whenComplete(() => 'Enviado!')
-        .catchError((error, stackTrace) {
-      throw Exception('Erro: ${error.toString()}');
-    });
+    await _db.collection('pets').add(pet.toMap());
   }
 
-  // Future<List<PetModel>> getAllPets() async {
-  //   final snapshot = await _db.collection('pets').get();
-
-  //   final petData = snapshot.docs.map((e) => PetModel.fromSnapshot(e)).toList();
-  //   return petData;
-  // }
+  Query<Map<String, dynamic>> query() {
+    final query = _db.collection('pets').orderBy('createdAt', descending: true);
+    return query;
+  }
 
   Future<List<PetModel>> getAllPets() async {
     final snapshot = await _db
