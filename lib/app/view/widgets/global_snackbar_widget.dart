@@ -17,9 +17,12 @@ class GlobalSnackBarWidget {
           style: const TextStyle(color: Colors.white),
         ),
         backgroundColor: backgroundColor,
-        duration: const Duration(seconds: 3),
+        duration: const Duration(seconds: 4),
         shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(Radius.circular(10))),
+          borderRadius: BorderRadius.all(
+            Radius.circular(10),
+          ),
+        ),
       ),
     );
   }
