@@ -130,8 +130,8 @@ class _FormWidgetState extends State<FormWidget> {
                   // Validate returns true if the form is valid, or false otherwise.
                   if (controller.formKey.currentState!.validate()) {
                     controller.formKey.currentState!.save();
-
                     try {
+                      // If the form is valid,save the information in a database.
                       controller.submitForm();
 
                       GlobalSnackBarWidget.show(context, 'Carregando...',
@@ -143,8 +143,6 @@ class _FormWidgetState extends State<FormWidget> {
                       GlobalSnackBarWidget.show(
                           context, 'Enviado!', Colors.green);
                     }
-
-                    // If the form is valid,save the information in a database.
                   } else {
                     GlobalSnackBarWidget.show(
                         context, 'Preencha todos os campos!', Colors.redAccent);
