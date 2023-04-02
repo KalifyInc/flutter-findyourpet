@@ -3,8 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:FindYourPet/app/themes/app_theme.dart';
 import 'app/config/firebase_options.dart';
 import 'app/view/pages/error_page.dart';
-import 'app/view/pages/loading_page.dart';
-import 'app/view/pages/start_page.dart';
+import 'app/view/pages/intro_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -35,14 +34,14 @@ class _AppState extends State<App> with WidgetsBindingObserver {
         future: _inicializacao,
         builder: (context, app) {
           if (app.connectionState == ConnectionState.done) {
-            return const StartPage();
+            return const IntroPage();
           }
 
           if (app.hasError) {
             return const ErrorPage();
           }
 
-          return const LoadingPage();
+          return const IntroPage();
         },
       ),
     );
