@@ -21,7 +21,7 @@ class _InformationPageState extends State<InformationPage> {
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Image.asset('assets/images/Logo-Transp.png'),
+                    Image.asset('assets/images/logo-transp.png'),
                     const Text(
                       'Versão 1.0.0',
                       style:
