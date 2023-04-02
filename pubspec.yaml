@@ -36,6 +36,9 @@ dependencies:
   # pagination
   firebase_pagination: ^3.0.0
 
+  # animation flutter
+  easy_splash_screen: ^1.0.4
+
   connectivity_plus: ^3.0.3
   font_awesome_flutter: ^10.4.0
 
