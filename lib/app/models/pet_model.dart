@@ -4,7 +4,6 @@ import 'dart:convert';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class PetModel {
-  final String? id;
   final String image;
   final String imageURL;
   final String name;
@@ -15,7 +14,6 @@ class PetModel {
   final String createdAt;
 
   PetModel({
-    this.id,
     required this.image,
     required this.imageURL,
     required this.name,
@@ -28,7 +26,6 @@ class PetModel {
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
-      'id': id,
       'image': image,
       'imageURL': imageURL,
       'name': name,
@@ -42,7 +39,6 @@ class PetModel {
 
   factory PetModel.fromMap(Map<String, dynamic> map) {
     return PetModel(
-      id: map['id'] as String,
       image: map['image'] as String,
       imageURL: map['imageURL'] as String,
       name: map['name'] as String,
@@ -69,7 +65,6 @@ class PetModel {
 
   static PetModel fromSnapshot(DocumentSnapshot document) {
     return PetModel(
-      id: document.id,
       image: document['image'],
       imageURL: document['imageURL'],
       name: document['name'],

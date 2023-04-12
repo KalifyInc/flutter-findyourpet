@@ -93,16 +93,13 @@ class _StartPageState extends State<StartPage> {
         body: Stack(children: <Widget>[
           routeController.buildOffstageNavigator('HomePage'),
           routeController.buildOffstageNavigator('RegisterPage'),
-          routeController.buildOffstageNavigator('MapsPage'),
+          // routeController.buildOffstageNavigator('MapsPage'),
           routeController.buildOffstageNavigator('InformationPage'),
           routeController.buildOffstageNavigator('ErrorPage'),
         ]),
         bottomNavigationBar: BottomNavigationBar(
           currentIndex: routeController.currentIndex,
           onTap: (int index) {
-            // setState(() {
-            //   currentIndex = newIndex;
-            // });
             _selectTab(routeController.pageKeys[index], index);
           },
           type: BottomNavigationBarType.fixed,
@@ -116,7 +113,7 @@ class _StartPageState extends State<StartPage> {
             BottomNavigationBarItem(icon: Icon(Icons.pets), label: ''),
             BottomNavigationBarItem(
                 icon: Icon(Icons.app_registration), label: ''),
-            BottomNavigationBarItem(icon: Icon(Icons.location_pin), label: ''),
+            // BottomNavigationBarItem(icon: Icon(Icons.location_pin), label: ''),
             BottomNavigationBarItem(icon: Icon(Icons.info_outline), label: ''),
           ],
         ),

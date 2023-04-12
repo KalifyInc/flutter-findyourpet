@@ -40,11 +40,13 @@ class _RegisterPageState extends State<RegisterPage> {
                   children: const [
                     Text(
                       'CADASTRAR PETS',
-                      style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 18,
+                      ),
                     ),
                     SizedBox(height: 16),
-                    FormWidget()
+                    FormWidget(),
                   ],
                 ),
               ),

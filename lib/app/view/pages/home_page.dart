@@ -37,20 +37,29 @@ class _HomePageState extends State<HomePage> {
             ),
             const Text(
               'FindYourPet',
-              style: TextStyle(fontSize: 25, fontWeight: FontWeight.w700),
+              style: TextStyle(
+                fontSize: 25,
+                fontWeight: FontWeight.w700,
+              ),
             ),
           ],
         ),
         centerTitle: true,
       ),
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 20.0),
+        padding: const EdgeInsets.symmetric(
+          horizontal: 16.0,
+          vertical: 20.0,
+        ),
         child: Center(
           child: Column(
             children: [
               const Text(
                 'ÚLTIMOS CADASTRADOS',
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 18,
+                ),
               ),
               const SizedBox(height: 20),
               Expanded(
@@ -59,7 +68,6 @@ class _HomePageState extends State<HomePage> {
                   builder: (context, snapshots) {
                     if (snapshots.connectionState == ConnectionState.done) {
                       if (snapshots.hasData) {
-                        final petData = snapshots.data!;
                         return RefreshIndicator(
                           onRefresh: () async {
                             setState(() {
@@ -98,7 +106,9 @@ class _HomePageState extends State<HomePage> {
                             child: Text('Algo de errado não está certo!'));
                       }
                     } else {
-                      return const Center(child: CircularProgressIndicator());
+                      return const Center(
+                        child: CircularProgressIndicator(),
+                      );
                     }
                   },
                 ),

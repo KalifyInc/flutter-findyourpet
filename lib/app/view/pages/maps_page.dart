@@ -26,7 +26,10 @@ class _MapsPageState extends State<MapsPage> {
               ),
               const Text(
                 'FindYourPet',
-                style: TextStyle(fontSize: 25, fontWeight: FontWeight.w700),
+                style: TextStyle(
+                  fontSize: 25,
+                  fontWeight: FontWeight.w700,
+                ),
               ),
             ],
           ),

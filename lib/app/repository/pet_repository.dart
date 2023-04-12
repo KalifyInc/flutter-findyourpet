@@ -26,10 +26,4 @@ class PetRepository {
     final petData = snapshot.docs.map((e) => PetModel.fromSnapshot(e)).toList();
     return petData;
   }
-
-  Stream<QuerySnapshot> getPetsSnapshot() {
-    final snapshot = _db.collection('pets').snapshots();
-
-    return snapshot;
-  }
 }

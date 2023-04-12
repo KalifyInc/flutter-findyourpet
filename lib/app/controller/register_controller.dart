@@ -56,7 +56,6 @@ class RegisterController {
     DateTime createdAtTime = DateTime.now();
 
     try {
-      // String ref = 'files/img-${DateTime.now().toString()}.png';
       String ref = 'files/${imageFile.name}';
       //storage thefile on storage Firebase
       await storage.ref(ref).putFile(file);

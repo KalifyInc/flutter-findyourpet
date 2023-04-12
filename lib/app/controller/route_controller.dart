@@ -9,14 +9,14 @@ class RouteController {
   List<String> pageKeys = const [
     'HomePage',
     'RegisterPage',
-    'MapsPage',
+    // 'MapsPage',
     'InformationPage',
   ];
 
   Map<String, GlobalKey<NavigatorState>> navigatorKeys = {
     'HomePage': GlobalKey<NavigatorState>(),
     'RegisterPage': GlobalKey<NavigatorState>(),
-    'MapsPage': GlobalKey<NavigatorState>(),
+    // 'MapsPage': GlobalKey<NavigatorState>(),
     'InformationPage': GlobalKey<NavigatorState>(),
     'ErrorPage': GlobalKey<NavigatorState>(),
   };
