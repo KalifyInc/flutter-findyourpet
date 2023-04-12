@@ -126,6 +126,13 @@ class _FormWidgetState extends State<FormWidget> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               ElevatedButton(
+                onPressed: () => controller.clearForm(),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color.fromARGB(255, 224, 209, 67),
+                ),
+                child: const Text('LIMPAR'),
+              ),
+              ElevatedButton(
                 onPressed: () {
                   // Validate returns true if the form is valid, or false otherwise.
                   if (controller.formKey.currentState!.validate()) {
@@ -149,14 +156,6 @@ class _FormWidgetState extends State<FormWidget> {
                   }
                 },
                 child: const Text('ENVIAR'),
-              ),
-              ElevatedButton(
-                onPressed: () => controller.clearForm(),
-                style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color.fromARGB(
-                        255, 224, 209, 67) // background (button) color
-                    ),
-                child: const Text('LIMPAR'),
               ),
             ],
           ),
