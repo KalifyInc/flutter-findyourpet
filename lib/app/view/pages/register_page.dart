@@ -1,3 +1,4 @@
+import 'package:FindYourPet/app/view/widgets/button_switch_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:FindYourPet/app/view/widgets/form_widget.dart';
 
@@ -30,6 +31,7 @@ class _RegisterPageState extends State<RegisterPage> {
             ],
           ),
           centerTitle: true,
+          actions: <Widget>[const ButtonSwitchTheme()],
         ),
         body: SingleChildScrollView(
           child: SafeArea(
@@ -42,7 +44,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       'CADASTRAR PETS',
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
-                        fontSize: 18,
+                        fontSize: 16,
                       ),
                     ),
                     SizedBox(height: 16),

@@ -3,6 +3,7 @@ import 'package:firebase_pagination/firebase_pagination.dart';
 import 'package:flutter/material.dart';
 
 import '../../models/pet_model.dart';
+import '../widgets/button_switch_theme.dart';
 import '../widgets/card_widget.dart';
 
 class HomePage extends StatefulWidget {
@@ -45,6 +46,7 @@ class _HomePageState extends State<HomePage> {
           ],
         ),
         centerTitle: true,
+        actions: <Widget>[const ButtonSwitchTheme()],
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(
