@@ -64,7 +64,10 @@ class _CardWidgetState extends State<CardWidget> {
                 subtitle: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(widget.description),
+                    Text(
+                      widget.description,
+                      style: const TextStyle(fontSize: 12),
+                    ),
                     const SizedBox(height: 16),
                     Row(
                       children: [
@@ -81,6 +84,7 @@ class _CardWidgetState extends State<CardWidget> {
                           style: const TextStyle(
                             fontWeight: FontWeight.w600,
                             color: Colors.teal,
+                            fontSize: 14,
                           ),
                         ),
                       ],

@@ -15,7 +15,7 @@ class _SubTitleState extends State<SubTitle> {
       widget.title,
       style: const TextStyle(
         fontWeight: FontWeight.w700,
-        fontSize: 16,
+        fontSize: 14,
       ),
     );
   }
