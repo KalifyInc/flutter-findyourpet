@@ -22,28 +22,33 @@ class _AppState extends State<App> with WidgetsBindingObserver {
   final Future<FirebaseApp> _inicializacao = Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Find your pet',
-      debugShowCheckedModeBanner: true,
-      theme: ThemeData(primarySwatch: Colors.teal, fontFamily: 'Poppins'),
-      darkTheme: AppTheme().darkTheme, // standard dark theme
-      themeMode: ThemeMode.system, // device controls theme),
-      home: FutureBuilder(
-        future: _inicializacao,
-        builder: (context, app) {
-          if (app.connectionState == ConnectionState.done) {
-            return const IntroPage();
-          }
+    return ValueListenableBuilder<ThemeMode>(
+        valueListenable: AppTheme.themeNotifier,
+        builder: (_, ThemeMode currentMode, __) {
+          return MaterialApp(
+            title: 'Find your pet',
+            debugShowCheckedModeBanner: false,
+            theme: AppTheme().lightTheme,
+            darkTheme: AppTheme().darkTheme, // standard dark theme
+            themeMode: currentMode,
+            home: FutureBuilder(
+              future: _inicializacao,
+              builder: (context, app) {
+                if (app.connectionState == ConnectionState.done) {
+                  return const IntroPage();
+                }
 
-          if (app.hasError) {
-            return const ErrorPage();
-          }
+                if (app.hasError) {
+                  return const ErrorPage();
+                }
 
-          return const IntroPage();
-        },
-      ),
-    );
+                return const IntroPage();
+              },
+            ),
+          );
+        });
   }
 }
