@@ -31,7 +31,7 @@ class _RegisterPageState extends State<RegisterPage> {
             ],
           ),
           centerTitle: true,
-          actions: <Widget>[const ButtonSwitchTheme()],
+          actions: const <Widget>[ButtonSwitchTheme()],
         ),
         body: SingleChildScrollView(
           child: SafeArea(

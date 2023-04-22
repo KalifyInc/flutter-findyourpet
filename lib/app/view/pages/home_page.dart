@@ -46,7 +46,7 @@ class _HomePageState extends State<HomePage> {
           ],
         ),
         centerTitle: true,
-        actions: <Widget>[const ButtonSwitchTheme()],
+        actions: const <Widget>[ButtonSwitchTheme()],
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(
@@ -70,37 +70,30 @@ class _HomePageState extends State<HomePage> {
                   builder: (context, snapshots) {
                     if (snapshots.connectionState == ConnectionState.done) {
                       if (snapshots.hasData) {
-                        return RefreshIndicator(
-                          onRefresh: () async {
-                            setState(() {
-                              petRepository.getAllPets();
+                        return FirestorePagination(
+                            query: petRepository.query(),
+                            limit: 7,
+                            onEmpty: const Center(
+                              child: Text('Cart is empty'),
+                            ),
+                            bottomLoader: const Center(
+                              child: CircularProgressIndicator(
+                                strokeWidth: 3,
+                                color: Colors.teal,
+                              ),
+                            ),
+                            itemBuilder: (context, documentSnapshot, index) {
+                              final data = documentSnapshot.data()
+                                  as Map<String, dynamic>;
+                              return CardWidget(
+                                imageURL: data['imageURL'],
+                                name: data['name'],
+                                status: data['status'],
+                                description: data['description'],
+                                telephone: data['contact'],
+                                map: data['locale'],
+                              );
                             });
-                          },
-                          child: FirestorePagination(
-                              query: petRepository.query(),
-                              limit: 7,
-                              onEmpty: const Center(
-                                child: Text('Cart is empty'),
-                              ),
-                              bottomLoader: const Center(
-                                child: CircularProgressIndicator(
-                                  strokeWidth: 3,
-                                  color: Colors.teal,
-                                ),
-                              ),
-                              itemBuilder: (context, documentSnapshot, index) {
-                                final data = documentSnapshot.data()
-                                    as Map<String, dynamic>;
-                                return CardWidget(
-                                  imageURL: data['imageURL'],
-                                  name: data['name'],
-                                  status: data['status'],
-                                  description: data['description'],
-                                  telephone: data['contact'],
-                                  map: data['locale'],
-                                );
-                              }),
-                        );
                       } else if (snapshots.hasError) {
                         return Center(child: Text(snapshots.error.toString()));
                       } else {
