@@ -29,7 +29,7 @@ class _AppState extends State<App> with WidgetsBindingObserver {
         valueListenable: AppTheme.themeNotifier,
         builder: (_, ThemeMode currentMode, __) {
           return MaterialApp(
-            title: 'Find your pet',
+            title: 'FindYourPet',
             debugShowCheckedModeBanner: false,
             theme: AppTheme().lightTheme,
             darkTheme: AppTheme().darkTheme, // standard dark theme
