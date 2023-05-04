@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:math';
 
 import 'package:FindYourPet/app/repository/pet_repository.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -54,7 +55,10 @@ class RegisterController {
     XFile imageFile = getImage();
     File file = File(imageFile.path);
     DateTime createdAtTime = DateTime.now();
-
+    Random random = new Random();
+    int randomNumber = random.nextInt(1000);
+    String slug = name.text.toLowerCase().replaceAll(' ', '-') + randomNumber.toString();
+    
     try {
       String ref = 'files/${imageFile.name}';
       //storage thefile on storage Firebase
@@ -74,6 +78,8 @@ class RegisterController {
       address: address.text,
       telephoneNumber: telephoneNumber.text,
       createdAt: createdAtTime.toString(),
+      slug: slug
+
     );
 
     createPet(pet);
