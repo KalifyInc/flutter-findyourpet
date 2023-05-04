@@ -54,11 +54,16 @@ class RegisterController {
   void submitForm() async {
     XFile imageFile = getImage();
     File file = File(imageFile.path);
-    DateTime createdAtTime = DateTime.now();
-    Random random = new Random();
+    DateTime date = DateTime.now();
+    DateTime validDate = date.add(Duration(days: 60));
+    String formatedDate =
+        "${date.day.toString().padLeft(2, '0')}/${date.month.toString().padLeft(2, '0')}/${date.year.toString()}";
+    String formatedValidDate =
+        "${validDate.day.toString().padLeft(2, '0')}/${validDate.month.toString().padLeft(2, '0')}/${validDate.year.toString()}";    Random random = new Random();
     int randomNumber = random.nextInt(1000);
-    String slug = name.text.toLowerCase().replaceAll(' ', '-') + randomNumber.toString();
-    
+    String slug =
+        name.text.toLowerCase().replaceAll(' ', '-') + randomNumber.toString();
+
     try {
       String ref = 'files/${imageFile.name}';
       //storage thefile on storage Firebase
@@ -70,17 +75,16 @@ class RegisterController {
     }
 
     final pet = PetModel(
-      image: imageFile.name,
-      imageURL: imageURL.toString(),
-      name: name.text,
-      description: description.text,
-      status: status.toString(),
-      address: address.text,
-      telephoneNumber: telephoneNumber.text,
-      createdAt: createdAtTime.toString(),
-      slug: slug
-
-    );
+        image: imageFile.name,
+        imageURL: imageURL.toString(),
+        name: name.text,
+        description: description.text,
+        status: status.toString(),
+        address: address.text,
+        telephoneNumber: telephoneNumber.text,
+        createdAt: formatedDate.toString(),
+        validDate: formatedValidDate.toString(),
+        slug: slug,);
 
     createPet(pet);
   }

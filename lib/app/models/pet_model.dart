@@ -12,6 +12,7 @@ class PetModel {
   final String address;
   final String telephoneNumber;
   final String createdAt;
+  final String validDate;
   final String slug;
 
   PetModel({
@@ -23,6 +24,7 @@ class PetModel {
     required this.address,
     required this.telephoneNumber,
     required this.createdAt,
+    required this.validDate,
     required this.slug,
   });
 
@@ -36,6 +38,7 @@ class PetModel {
       'locale': address,
       'contact': telephoneNumber,
       'createdAt': createdAt,
+      'validDate': validDate,
       'slug': slug,
     };
   }
@@ -50,6 +53,7 @@ class PetModel {
       address: map['address'] as String,
       telephoneNumber: map['telephoneNumber'] as String,
       createdAt: map['createdAt'] as String,
+      validDate: map['validDate'] as String,
       slug: map['slug'] as String,
     );
   }
@@ -65,6 +69,7 @@ class PetModel {
         address: json['locale'],
         telephoneNumber: json['contact'],
         createdAt: json['createdAt'],
+        validDate: json['validDate'],
         slug: json['slug'],
       );
 
@@ -78,6 +83,7 @@ class PetModel {
       address: document['locale'],
       telephoneNumber: document['contact'],
       createdAt: document['createdAt'],
+      validDate: document['validDate'],
       slug: document['slug'],
     );
   }
