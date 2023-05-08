@@ -92,9 +92,13 @@ Here's some tips:
 
 Check out the [contributing](https://github.com/KalifyInc/mobile-findyourpet/graphs/contributors) page to see the best places to file issues, start discussions and begin contributing.
 
+
+
 # 📕 License
 
 <!-- Released in 2021 -->
 
-Made by [Helen Cris](https://github.com/HelenCris) and [contributors](https://github.com/KalifyInc/mobile-findyourpet/graphs/contributors).
 This project is under the [MIT license](./LICENSE).
+
+
+Made by [Helen Cris](https://github.com/HelenCris) and [contributors](https://github.com/KalifyInc/mobile-findyourpet/graphs/contributors).
