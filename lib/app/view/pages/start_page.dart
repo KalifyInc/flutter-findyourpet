@@ -1,9 +1,9 @@
 import 'dart:async';
 
 import 'package:FindYourPet/app/controller/route_controller.dart';
-import 'package:connectivity_plus/connectivity_plus.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
+import '../../controller/connectivity_controller.dart';
 
 class StartPage extends StatefulWidget {
   const StartPage({super.key});
@@ -13,11 +13,14 @@ class StartPage extends StatefulWidget {
 }
 
 class _StartPageState extends State<StartPage> {
-  late ConnectivityResult result;
-  late StreamSubscription subscription;
-  var isConnected = false;
-
   RouteController routeController = RouteController();
+  var connectivityController = ConnectivityController();
+
+  @override
+  void initState() {
+    super.initState();
+    connectivityController.startStreaming(context);
+  }
 
   void _selectTab(String tabItem, int index) {
     if (tabItem == routeController.currentPage) {
@@ -29,47 +32,6 @@ class _StartPageState extends State<StartPage> {
         routeController.currentIndex = index;
       });
     }
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    startStreaming();
-  }
-
-  checkInternet() async {
-    result = await Connectivity().checkConnectivity();
-    if (result != ConnectivityResult.none) {
-      isConnected = true;
-    } else {
-      isConnected = false;
-      showDialogBox();
-    }
-    setState(() {});
-  }
-
-  showDialogBox() {
-    showDialog(
-        barrierDismissible: false,
-        context: context,
-        builder: (context) => CupertinoAlertDialog(
-                title: const Text('Sem internet!'),
-                content: const Text('Confira sua conexão com a internet'),
-                actions: [
-                  CupertinoButton.filled(
-                    child: const Text('Tente novamente'),
-                    onPressed: () {
-                      Navigator.pop(context);
-                      checkInternet();
-                    },
-                  )
-                ]));
-  }
-
-  startStreaming() {
-    subscription = Connectivity().onConnectivityChanged.listen((event) async {
-      checkInternet();
-    });
   }
 
   @override
