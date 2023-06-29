@@ -1,84 +1,63 @@
-import 'dart:async';
-
-import 'package:FindYourPet/app/controller/route_controller.dart';
 import 'package:flutter/material.dart';
 
-import '../../controller/connectivity_controller.dart';
+import '../widgets/tab_navigator_item_widget.dart';
 
-class StartPage extends StatefulWidget {
-  const StartPage({super.key});
+// ignore: must_be_immutable
+class BottomTabsPage extends StatefulWidget {
+  int selectedIndex = 0;
+
+  BottomTabsPage({required this.selectedIndex});
 
   @override
-  State<StartPage> createState() => _StartPageState();
+  // ignore: library_private_types_in_public_api
+  _BottomTabsPageState createState() => _BottomTabsPageState();
 }
 
-class _StartPageState extends State<StartPage> {
-  RouteController routeController = RouteController();
-  var connectivityController = ConnectivityController();
+class _BottomTabsPageState extends State<BottomTabsPage> {
+  int _selectedIndex = 0;
+
+  void _onItemTapped(int index) {
+    setState(() {
+      widget.selectedIndex = index;
+      _selectedIndex = widget.selectedIndex;
+      print(_selectedIndex);
+    });
+  }
 
   @override
   void initState() {
+    _onItemTapped(widget.selectedIndex);
     super.initState();
-    connectivityController.startStreaming(context);
-  }
-
-  void _selectTab(String tabItem, int index) {
-    if (tabItem == routeController.currentPage) {
-      routeController.navigatorKeys[tabItem]!.currentState!
-          .popUntil((route) => route.isFirst);
-    } else {
-      setState(() {
-        routeController.currentPage = routeController.pageKeys[index];
-        routeController.currentIndex = index;
-      });
-    }
   }
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: () async {
-        final isFirstRouteInCurrentTab = !await routeController
-            .navigatorKeys[routeController.currentPage]!.currentState!
-            .maybePop();
-        if (isFirstRouteInCurrentTab) {
-          if (routeController.currentPage != 'HomePage') {
-            _selectTab('HomePage', 1);
-
-            return false;
-          }
-        }
-        // let system handle back button if we're on the first route
-        return isFirstRouteInCurrentTab;
-      },
-      child: Scaffold(
-        body: Stack(children: <Widget>[
-          routeController.buildOffstageNavigator('HomePage'),
-          routeController.buildOffstageNavigator('RegisterPage'),
-          // routeController.buildOffstageNavigator('MapsPage'),
-          routeController.buildOffstageNavigator('InformationPage'),
-          routeController.buildOffstageNavigator('ErrorPage'),
-        ]),
-        bottomNavigationBar: BottomNavigationBar(
-          currentIndex: routeController.currentIndex,
-          onTap: (int index) {
-            _selectTab(routeController.pageKeys[index], index);
-          },
-          type: BottomNavigationBarType.fixed,
-          selectedItemColor: Colors.teal,
-          unselectedItemColor: Colors.grey,
-          showSelectedLabels: false,
-          showUnselectedLabels: false,
-          iconSize: 28,
-          selectedIconTheme: const IconThemeData(size: 34.0),
-          items: const [
-            BottomNavigationBarItem(icon: Icon(Icons.pets), label: ''),
-            BottomNavigationBarItem(
-                icon: Icon(Icons.app_registration), label: ''),
-            // BottomNavigationBarItem(icon: Icon(Icons.location_pin), label: ''),
-            BottomNavigationBarItem(icon: Icon(Icons.info_outline), label: ''),
+    return Scaffold(
+      body: Scaffold(
+        body: IndexedStack(
+          index: widget.selectedIndex,
+          children: [
+            for (final tabItem in TabNavigationItem.items) tabItem.page,
           ],
         ),
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(icon: Icon(Icons.pets), label: ''),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.app_registration), label: ''),
+          // BottomNavigationBarItem(icon: Icon(Icons.location_pin), label: ''),
+          BottomNavigationBarItem(icon: Icon(Icons.info_outline), label: ''),
+        ],
+        currentIndex: _selectedIndex,
+        type: BottomNavigationBarType.fixed,
+        selectedItemColor: Colors.teal,
+        unselectedItemColor: Colors.grey,
+        showSelectedLabels: false,
+        showUnselectedLabels: false,
+        iconSize: 28,
+        selectedIconTheme: const IconThemeData(size: 34.0),
+        onTap: _onItemTapped,
       ),
     );
   }

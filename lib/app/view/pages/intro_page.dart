@@ -16,7 +16,7 @@ class IntroPage extends StatelessWidget {
       backgroundColor: Colors.grey.shade100,
       showLoader: true,
       loaderColor: Colors.teal,
-      navigator: const StartPage(),
+      navigator: BottomTabsPage(selectedIndex: 0),
       durationInSeconds: 5,
     );
   }
