@@ -13,14 +13,14 @@ class PetRepository {
   }
 
   Query<Map<String, dynamic>> query() {
-    final query = _db.collection('pets').orderBy('createdAt');
+    final query = _db.collection('pets').orderBy('createdAt', descending: true);
     return query;
   }
 
   Future<List<PetModel>> getAllPets() async {
     final snapshot = await _db
         .collection('pets')
-        .orderBy('createdAt')
+        .orderBy('createdAt', descending: true)
         .get();
 
     final petData = snapshot.docs.map((e) => PetModel.fromSnapshot(e)).toList();
