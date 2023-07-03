@@ -26,7 +26,7 @@ class _InformationPageState extends State<InformationPage> {
                   children: [
                     Image.asset('assets/images/logo-transp.png'),
                     const Text(
-                      'Versão 1.0.5',
+                      'Versão 1.1.0',
                       style:
                           TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
                     ),
