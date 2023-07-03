@@ -3,7 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'package:FindYourPet/app/view/widgets/subtitle.dart';
 
-import '../../controller/whatsapp_controller.dart';
+import '../../controller/link_controller.dart';
 
 class CardInsidePage extends StatelessWidget {
   CardInsidePage({
@@ -25,7 +25,7 @@ class CardInsidePage extends StatelessWidget {
   final String telephone;
   final String map;
 
-  final whatsappController = WhatsAppController();
+  final controller = LinkController();
 
   @override
   Widget build(BuildContext context) {
@@ -102,23 +102,11 @@ class CardInsidePage extends StatelessWidget {
                                 foregroundColor: Colors.white,
                               ),
                               onPressed: () async {
-                                try {
-                                  await whatsappController.openWhatsapp(
-                                    context: context,
-                                    telephoneNumber: telephone,
-                                  );
-                                } catch (e) {
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(
-                                      content: Text(
-                                        'Erro: ${e.toString()}',
-                                        style: const TextStyle(
-                                            color: Colors.white),
-                                      ),
-                                      backgroundColor: Colors.redAccent,
-                                    ),
-                                  );
-                                }
+                                await controller.openLink(
+                                  context: context,
+                                  urlParam:
+                                      "https://api.whatsapp.com/send?phone=$telephone&text=Olá%2C+tudo+bom%3F+Vim+do+FindYourPet+e+estou+interessada+em+saber+mais+a+respeito+do+pet+que+está+no+anúncio+..",
+                                );
                               },
                             ),
                           ),

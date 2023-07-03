@@ -1,5 +1,6 @@
-import 'package:FindYourPet/app/controller/information_controller.dart';
 import 'package:flutter/material.dart';
+
+import '../../controller/link_controller.dart';
 
 class InformationPage extends StatefulWidget {
   const InformationPage({super.key});
@@ -10,7 +11,7 @@ class InformationPage extends StatefulWidget {
 
 class _InformationPageState extends State<InformationPage> {
   final currentYear = DateTime.now().year;
-  final informationController = InformationController();
+  final controller = LinkController();
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -25,7 +26,7 @@ class _InformationPageState extends State<InformationPage> {
                   children: [
                     Image.asset('assets/images/logo-transp.png'),
                     const Text(
-                      'Versão 1.0.3',
+                      'Versão 1.0.5',
                       style:
                           TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
                     ),
@@ -34,15 +35,20 @@ class _InformationPageState extends State<InformationPage> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         TextButton(
-                            onPressed: () => informationController.openTermos(),
+                            onPressed: () => controller.openLink(
+                                context: context,
+                                urlParam:
+                                    'https://findyourpet.vercel.app/termos/'),
                             child: const Text(
                               'Termos',
                               style: TextStyle(fontSize: 14),
                             )),
                         const Text('-'),
                         TextButton(
-                            onPressed: () => informationController
-                                .openPoliticasDePrivacidade(),
+                            onPressed: () => controller.openLink(
+                                context: context,
+                                urlParam:
+                                    'https://findyourpet.vercel.app/politicas-de-privacidade/'),
                             child: const Text(
                               'Politicas de Privacidade',
                               style: TextStyle(fontSize: 14),
